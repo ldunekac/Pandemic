@@ -6,7 +6,6 @@ class Deck:
     def __init__(self, deck):
         self.deck = deck
         self.discardPile = []
-        self.shuffle()
 
     def  shuffle(self):
         """ Shuffles the deck"""
