@@ -25,13 +25,13 @@ suitePlayerMove = unittest.TestSuite(map(PlayerMove, testcasesPlayerMove))
 
 ##########################################################
 
-class CureDisease(unittest.TestCase):
+class TreatDisease(unittest.TestCase):
     """ Test cases of PlayerMove """
     
     def  setUp(self):
         """ Build the *** for the test """
         
-    def cureDisease(self):
+    def treatDisease(self):
         """ Test that ... """
         disease = Disease()
         city = City("Luke's confiement center",disease)
@@ -39,20 +39,20 @@ class CureDisease(unittest.TestCase):
 
         player = Player(city)
 
-        player.cureDisease()
+        player.treatDisease()
 
         assert city.diseaseCounts[disease] == 4, "Player did not cure city of a disease"
 
 # Collect all test cases in this class
-testcasesCureDisease = ["cureDisease"]
-suiteCureDisease = unittest.TestSuite(map(CureDisease, testcasesCureDisease))
+testcasesTreatDisease = ["treatDisease"]
+suiteTreatDisease = unittest.TestSuite(map(TreatDisease, testcasesTreatDisease))
 
 ##########################################################
 
 
 
 # Collect all test cases in this file
-suites = [suitePlayerMove, suiteCureDisease]
+suites = [suitePlayerMove, suiteTreatDisease]
 suite = unittest.TestSuite(suites)
 
 if __name__ == "__main__":

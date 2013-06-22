@@ -45,7 +45,7 @@ suiteInfect = unittest.TestSuite(map(infect, testcasesInfect))
 
 ##########################################################
 
-class Cure(unittest.TestCase):
+class Treat(unittest.TestCase):
     """ Test cases of infect """
     
     def  setUp(self):
@@ -57,24 +57,24 @@ class Cure(unittest.TestCase):
         """ Test that a city's disease count decreases by the specified amount """
         amount = 3
         self.city.diseaseCounts[self.disease] = 5
-        self.city.cureDisease(amount)
+        self.city.treatDisease(amount)
 
         assert self.city.diseaseCounts[self.disease] == 2, "City did not decrease disease by desired amount"
 
-        self.city.cureDisease(amount)
+        self.city.treatDisease(amount)
 
         assert self.city.diseaseCounts[self.disease] == 0, "City disease count is not zero"          
 
 # Collect all test cases in this class
-testcasesCure = ["infectCountDecrease"]
-suiteCure = unittest.TestSuite(map(Cure, testcasesCure))
+testcasesTreat = ["infectCountDecrease"]
+suiteTreat = unittest.TestSuite(map(Treat, testcasesTreat))
 
 ##########################################################
 
 
 
 # Collect all test cases in this file
-suites = [suiteAddAdjacentCity, suiteInfect, suiteCure]
+suites = [suiteAddAdjacentCity, suiteInfect, suiteTreat]
 suite = unittest.TestSuite(suites)
 
 if __name__ == "__main__":

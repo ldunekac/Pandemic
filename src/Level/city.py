@@ -24,7 +24,7 @@ class City:
             self.diseaseCounts[disease] = amount
         # Will need to check for outbreaks at some point
 
-    def cureDisease(self, amount, disease = None):
+    def treatDisease(self, amount, disease = None):
         """ Cures a city of a disease by a given amount"""
         if disease is None:
             disease = self.disease
