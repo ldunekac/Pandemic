@@ -6,8 +6,12 @@ class City:
         """ Initialize the city """
         self.name = name
         self.disease = disease
-        self.adjacentCities = []
+        self.adjacentCities = set()
         self.diseaseCounts = {}
+        
+    def addAdjacentCity(self, city):
+        """ Add a city to this city's adjacency list """
+        self.adjacentCities.add(city)
         
     def __repr__(self):
         """ Return the string representtation of the City """
