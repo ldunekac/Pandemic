@@ -9,7 +9,10 @@ def main(args):
     #sys.exit(app.exec_())
     level = Level()
     
-    print level.cities
+    for city in level.cities:
+        print city
+        print "Adjacent to:"
+        print city.adjacentCities
 
 if __name__ == "__main__":
     main(sys.argv[1:])

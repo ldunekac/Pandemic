@@ -21,8 +21,13 @@ class Level:
         disease = Disease()
         self.diseases.append(disease)
         
-        self.cities.append(City("San Francisco", disease))
-        self.cities.append(City("Chicago", disease))
+        sanFrancisco = City("San Francisco", disease)
+        chicago = City("Chicago", disease)
+        
+        self.cities.append(chicago)
+        self.cities.append(sanFrancisco)
+        
+        self.makeCitiesAdjacent(chicago, sanFrancisco)
         
     def makeCitiesAdjacent(self, city1, city2):
         """ Make the two cities given adjacent """
