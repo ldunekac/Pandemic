@@ -8,4 +8,6 @@ class LevelView:
         
     def display(self):
         """ Display the Level View """
-        print ""
+        # Print Player locations
+        print "1. View cities\r"
+        # User actions
