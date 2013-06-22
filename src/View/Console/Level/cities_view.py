@@ -8,5 +8,5 @@ class CitiesView:
         
     def display(self):
         """ Display all the cities """
-        for city in cities:
+        for city in self.cities:
             print city, "\r"
