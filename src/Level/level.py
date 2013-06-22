@@ -1,6 +1,7 @@
 from Level.city import City
 from Level.Deck.infection_deck import InfectionDeck
 from Level.Disease.disease import Disease
+from Level.Player.player import Player
 
 class Level:
     """ Represents a single Level of the Expanded Pandemic Game """
@@ -42,6 +43,7 @@ class Level:
         paris = City("Paris", disease)
         stPetersburg = City("St. Petersburg", disease)
         milan = City("Milan", disease)
+        self.startingCity = atlanta
         
         self.cities.append(chicago)
         self.cities.append(sanFrancisco)
@@ -92,6 +94,7 @@ class Level:
         """ Setup Players """
         # Choose roles
         # Add Players to list
+        self.players.append(Player(self.startingCity))
         # Give each 4 cards in their hand
         
     def addEpidemics(self):
