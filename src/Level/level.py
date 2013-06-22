@@ -29,7 +29,7 @@ class Level:
         washington = City("Washington", disease)
         london = City("London", disease)
         madrid = City("Madrid", disease)
-        essen = City("Esses", disease)
+        essen = City("Essen", disease)
         paris = City("Paris", disease)
         stPetersburg = City("St. Petersburg", disease)
         milan = City("Milan", disease)
