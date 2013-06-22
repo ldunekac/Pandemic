@@ -1,6 +1,24 @@
 import unittest
 from Level.Deck.deck import Deck
 
+class init(unittest.TestCase):
+    """ Test cases of init """
+    
+    def  setUp(self):
+        """ Build the *** for the test """
+        self.myList = []
+        self.testDeck = Deck(self.myList)
+
+    def copyDeckArgument(self):
+        """ Ensure the Deck's deck variable is a copy of the original deck argument """
+        assert self.testDeck.deck is not self.myList, "The Deck should have a copy of the original list"
+
+# Collect all test cases in this class
+testcasesInit = ["copyDeckArgument"]
+suiteInit = unittest.TestSuite(map(init, testcasesInit))
+
+##########################################################
+
 class draw(unittest.TestCase):
     """ Test cases of draw """
     
@@ -57,11 +75,8 @@ suiteDiscard = unittest.TestSuite(map(discard, testcasesDiscard))
 
 ##########################################################
 
-
-
-
 # Collect all test cases in this file
-suites = [suiteDraw, suiteDiscard]
+suites = [suiteInit, suiteDraw, suiteDiscard]
 suite = unittest.TestSuite(suites)
 
 if __name__ == "__main__":

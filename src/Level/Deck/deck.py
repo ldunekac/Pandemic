@@ -4,7 +4,7 @@ class Deck:
 
     """"Sets up a deck"""
     def __init__(self, deck):
-        self.deck = deck
+        self.deck = list(deck)
         self.discardPile = []
 
     def  shuffle(self):
