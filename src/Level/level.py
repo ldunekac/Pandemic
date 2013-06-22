@@ -23,3 +23,8 @@ class Level:
         
         self.cities.append(City("San Francisco", disease))
         self.cities.append(City("Chicago", disease))
+        
+    def makeCitiesAdjacent(self, city1, city2):
+        """ Make the two cities given adjacent """
+        city1.addAdjacentCity(city2)
+        city2.addAdjacentCity(city1)
