@@ -21,6 +21,9 @@ class Level:
         """ Setup the level for the start of the game """
         self.setupCities()
         self.setupInfectionDeck()
+        self.setupPlayerDeck()
+        self.setupPlayers()
+        self.addEpidemics()
         
     def setupCities(self):
         """ Setup the cities """
@@ -79,6 +82,21 @@ class Level:
             for i in range(3):
                 city = self.infectionDeck.draw()
                 city.infect(infectionAmount)
+                
+    def setupPlayerDeck(self):
+        """ Setup the player Deck """
+        #self.playerDeck = PlayerDeck()
+        #self.playerDeck.shuffle()
+                
+    def setupPlayers(self):
+        """ Setup Players """
+        # Choose roles
+        # Add Players to list
+        # Give each 4 cards in their hand
+        
+    def addEpidemics(self):
+        """ Setup Players """
+        # Add X Epidemics to the Player Deck
         
     def makeCitiesAdjacent(self, city1, city2):
         """ Make the two cities given adjacent """
