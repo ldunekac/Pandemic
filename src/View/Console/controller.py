@@ -1,5 +1,6 @@
 from View.Console.input_processor import inputProcessor
 
+from kao_console import cls
 from kao_console.ascii import *
 
 class Controller:
@@ -16,6 +17,7 @@ class Controller:
         self.running = True
         
         while self.running:
+            cls()
             self.screen.display()
             inputProcessor.processInput(self.commands)
             
