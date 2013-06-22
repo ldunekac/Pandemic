@@ -4,6 +4,7 @@ from View.Console.controller import Controller
 from View.Console.Level.cities_controller import CitiesController
 from View.Console.Level.city_controller import CityController
 from View.Console.Level.level_view import LevelView
+from View.Console.Level.Player.player_move_controller import PlayerMoveController
 
 class LevelController(Controller):
     """ Controller for the level """
@@ -29,7 +30,8 @@ class LevelController(Controller):
         
     def moveToACity(self):
         """ Move the Player to a city """
-        self.level.players[0].moveTo(self.level.cities[0])
+        controller = PlayerMoveController(self.level.players[0])
+        controller.run()
         
     def cureCurrentCity(self):
         """ Cure the current city """

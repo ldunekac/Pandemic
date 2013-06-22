@@ -14,3 +14,4 @@ class PlayerMoveView:
         value = 0
         for city in self.player.city.adjacentCities:
             print "{0}: {1}\r".format(value, city)
+            value += 1
