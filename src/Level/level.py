@@ -1,4 +1,5 @@
 from Level.city import City
+from Level.Deck.infection_deck import InfectionDeck
 from Level.Disease.disease import Disease
 
 class Level:
@@ -18,6 +19,11 @@ class Level:
         
     def setup(self):
         """ Setup the level for the start of the game """
+        self.setupCities()
+        self.setupInfectionDeck()
+        
+    def setupCities(self):
+        """ Setup the cities """
         disease = Disease()
         self.diseases.append(disease)
         
@@ -63,6 +69,16 @@ class Level:
         self.makeCitiesAdjacent(essen, stPetersburg)
         self.makeCitiesAdjacent(essen, milan)
         self.makeCitiesAdjacent(paris, milan)
+        
+    def setupInfectionDeck(self):
+        """ Setup the Infection Deck """
+        self.infectionDeck = InfectionDeck(self.cities)
+        self.infectionDeck.shuffle()
+        
+        for infectionAmount in [3,2,1]:
+            for i in range(3):
+                city = self.infectionDeck.draw()
+                print "Plagueing {0} for {1}\r".format(city, infectionAmount)
         
     def makeCitiesAdjacent(self, city1, city2):
         """ Make the two cities given adjacent """
