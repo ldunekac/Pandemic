@@ -78,7 +78,7 @@ class Level:
         for infectionAmount in [3,2,1]:
             for i in range(3):
                 city = self.infectionDeck.draw()
-                print "Plagueing {0} for {1}\r".format(city, infectionAmount)
+                city.infect(infectionAmount)
         
     def makeCitiesAdjacent(self, city1, city2):
         """ Make the two cities given adjacent """
