@@ -8,10 +8,18 @@ class CityView:
         
     def display(self):
         """ Display the city details """
-        print city, "\r"
+        print self.city, "\r"
         print
-        print "Disease Count:", city.diseaseCount[city.diseaseCount.keys()[0]], "\r"
-        print 
+        self.displayDiseaseCounts()
         print "Adjacent to:", "\r"
-        for adjacentCity in city.adjacentCities:
+        for adjacentCity in self.city.adjacentCities:
             print adjacentCity, "\r"
+            
+    def displayDiseaseCounts(self):
+        """ Display the disease counts """
+        if len(self.city.diseaseCounts) == 0:
+            print "Not Diseased", "\r"
+        else:
+            for disease in self.city.diseaseCounts:
+                print "Disease Count:", self.city.diseaseCounts[disease], "\r"
+        print 
