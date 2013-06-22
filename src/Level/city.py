@@ -8,3 +8,7 @@ class City:
         self.disease = disease
         self.adjacentCities = []
         self.diseaseCounts = {}
+        
+    def __repr__(self):
+        """ Return the string representtation of the City """
+        return self.name

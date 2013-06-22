@@ -1,3 +1,4 @@
+from Level.city import City
 from Level.Disease.disease import Disease
 
 class Level:
@@ -20,5 +21,5 @@ class Level:
         disease = Disease()
         self.diseases.append(disease)
         
-        self.cities.append("San Francisco", disease)
-        self.cities.append("Chicago", disease)
+        self.cities.append(City("San Francisco", disease))
+        self.cities.append(City("Chicago", disease))
