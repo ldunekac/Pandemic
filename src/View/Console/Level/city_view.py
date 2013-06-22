@@ -8,7 +8,7 @@ class CityView:
         
     def display(self):
         """ Display the city details """
-        print self.city, "\r"
+        print self.city, "Details:", "\r"
         print
         self.displayDiseaseCounts()
         print "Adjacent to:", "\r"
