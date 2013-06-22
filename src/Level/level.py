@@ -1,3 +1,4 @@
+from Level.Disease.disease import Disease
 
 class Level:
     """ Represents a single Level of the Expanded Pandemic Game """
@@ -11,3 +12,13 @@ class Level:
         self.playerDeck = None
         
         self.players = []
+
+        self.setup()
+        
+    def setup(self):
+        """ Setup the level for the start of the game """
+        disease = Disease()
+        self.diseases.append(disease)
+        
+        self.cities.append("San Francisco", disease)
+        self.cities.append("Chicago", disease)
