@@ -7,5 +7,5 @@ from Level.Deck.Test.suite import suite as deck_suite
 
 suites = [city_test_suite, 
           deck_suite,
-          level_suite]
+          level_test_suite]
 suite = unittest.TestSuite(suites)
