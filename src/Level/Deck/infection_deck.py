@@ -8,7 +8,7 @@ class InfectionDeck(Deck):
 
     def draw(self):
         if len(self.deck) == 0:
-            return None
+            self.intensify()
         card = self.deck.pop()
         self.discard(card)
         return card

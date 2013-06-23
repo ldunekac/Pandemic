@@ -1,14 +1,14 @@
-from player_move_view import PlayerMoveView
-
 from View.Console.controller import Controller
+from View.Console.Level.Player.player_move_to_card_view import PlayerMoveToCardView
 
-class PlayerMoveController(Controller):
-    """ Controller for Player Movement """
+class PlayerMoveToCardController(Controller):
+    """ Controller for a *** """
     
-    def __init__(self, player):
-        """ Initialize the Player Move Controller """
-        Controller.__init__(self, PlayerMoveView(player))
+    def __init__(self, player, playerDeck):
+        """ Initialize the *** Controller """
+        Controller.__init__(self, PlayerMoveToCardView(player))
         self.player = player
+        self.playerDeck = playerDeck
         self.actionCompleted = False
         
         self.addCommand(ord('0'), self.moveToCityZero)
@@ -64,8 +64,10 @@ class PlayerMoveController(Controller):
         
     def moveToCity(self, index):
         """ View the selected city """
-        city = self.screen.getCity(index)
-        if city is not None:
-            self.player.moveTo(city)
+        card = self.screen.getCard(index)
+        if card is not None:
+            self.player.moveTo(card.city)
+            self.player.removeCardFromHand(card)
+            self.playerDeck.discard(card)
             self.actionCompleted = True
             self.stopRunning()

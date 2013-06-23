@@ -16,14 +16,28 @@ class Controller:
         """  """
         self.running = True
         
-        while self.running:
-            cls()
-            self.screen.display()
-            inputProcessor.processInput(self.commands)
+        while self.isRunning():
+            self.performGameCycle()
+            
+            if self.isRunning():
+                cls()
+                self.screen.display()
+                self.handleInput()
             
     def stopRunning(self):
         """ Stop running this controller """
         self.running = False
+        
+    def isRunning(self):
+        """ Returns if the controller is still running """
+        return self.running
+        
+    def performGameCycle(self):
+        """ Perform a Game Cycle Event """
+        
+    def handleInput(self):
+        """ Handle User Input """
+        inputProcessor.processInput(self.commands)
         
     def addCommand(self, character, command):
         """ Add the given command to happen on the given character """

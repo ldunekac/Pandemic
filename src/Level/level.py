@@ -1,5 +1,7 @@
 from Level.city import City
 from Level.Deck.infection_deck import InfectionDeck
+from Level.Deck.player_deck import PlayerDeck
+from Level.Deck.Card.city_card import CityCard
 from Level.Disease.disease import Disease
 from Level.Player.player import Player
 
@@ -87,15 +89,23 @@ class Level:
                 
     def setupPlayerDeck(self):
         """ Setup the player Deck """
-        #self.playerDeck = PlayerDeck()
-        #self.playerDeck.shuffle()
+        cityCards = []
+        for city in self.cities:
+            cityCards.append(CityCard(city))
+        
+        self.playerDeck = PlayerDeck(cityCards)
+        self.playerDeck.shuffle()
                 
     def setupPlayers(self):
         """ Setup Players """
         # Choose roles
         # Add Players to list
-        self.players.append(Player(self.startingCity))
+        player = Player(self.startingCity)
+        self.players.append(player)
         # Give each 4 cards in their hand
+        for i in range(4):
+            card = self.playerDeck.draw()
+            player.addCardToHand(card)
         
     def addEpidemics(self):
         """ Setup Players """
