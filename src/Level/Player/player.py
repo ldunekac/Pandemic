@@ -18,6 +18,10 @@ class Player:
         self.city.treatDisease(self.DISEASE_CURE_AMOUNT,disease)
 
     def addCardToHand(self, card):
-        """ Add the given card to he player's hand """
+        """ Add the given card to the player's hand """
         self.hand.append(card)
+        
+    def removeCardFromHand(self, card):
+        """ Remove the given card from the player's hand """
+        self.hand.remove(card)
         

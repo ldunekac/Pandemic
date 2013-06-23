@@ -3,6 +3,7 @@ from View.Console.Level.cities_controller import CitiesController
 from View.Console.Level.city_controller import CityController
 from View.Console.Level.level_view import LevelView
 from View.Console.Level.Player.player_move_controller import PlayerMoveController
+from View.Console.Level.Player.player_move_to_card_controller import PlayerMoveToCardController
 from View.Console.Level.Player.player_action_view import PlayerActionView
 
 from kao_console.ascii import *
@@ -46,13 +47,11 @@ class PlayerActionController(Controller):
     # Actual actions -- If the Action succeeds this controller should stop
     def moveToAdjacentCity(self):
         """ Move the Player to a city """
-        controller = PlayerMoveController(self.player)
-        controller.run()
-        if controller.actionCompleted:
-            self.useAction()
+        self.runActionController(PlayerMoveController(self.player))
             
     def moveToCityOnCard(self):
         """ Move to a city on a card in the player's hand """
+        self.runActionController(PlayerMoveToCardController(self.player, self.level.playerDeck))
         
     def moveFromCityCard(self):
         """ Move to any city from a card for the player's current city """
@@ -72,6 +71,12 @@ class PlayerActionController(Controller):
     def isRunning(self):
         """ Return if the controller is running """
         return not self.quitting and self.screen.actionCount > 0
+        
+    def runActionController(self, controller):
+        """ Run an action Controller """
+        controller.run()
+        if controller.actionCompleted:
+            self.useAction()
     
     def useAction(self):
         """ Use an action point """
