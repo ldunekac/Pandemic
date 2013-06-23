@@ -57,11 +57,11 @@ class Treat(unittest.TestCase):
         """ Test that a city's disease count decreases by the specified amount """
         amount = 3
         self.city.diseaseCounts[self.disease] = 5
-        self.city.treatDisease(amount)
+        self.city.treat(amount)
 
         assert self.city.diseaseCounts[self.disease] == 2, "City did not decrease disease by desired amount"
 
-        self.city.treatDisease(amount)
+        self.city.treat(amount)
 
         assert self.city.diseaseCounts[self.disease] == 0, "City disease count is not zero"          
 
@@ -70,7 +70,6 @@ testcasesTreat = ["infectCountDecrease"]
 suiteTreat = unittest.TestSuite(map(Treat, testcasesTreat))
 
 ##########################################################
-
 
 
 # Collect all test cases in this file

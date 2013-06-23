@@ -14,4 +14,4 @@ class Player:
 
     def treatDisease(self, disease = None):
         """Cures a disease in their current city"""
-        self.city.treatDisease(self.DISEASE_CURE_AMOUNT,disease)
+        self.city.treat(self.DISEASE_CURE_AMOUNT,disease)
