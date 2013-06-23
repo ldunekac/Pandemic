@@ -24,6 +24,7 @@ class PlayerActionController(Controller):
         self.addCommand(ord('2'), self.viewCities)
         self.addCommand(ord('3'), self.moveToACity)
         self.addCommand(ord('4'), self.treatCurrentCity)
+        self.addCommand(ord('5'), self.stopEarly)
         
     def viewCity(self):
         """ View the level's cities """
@@ -35,6 +36,10 @@ class PlayerActionController(Controller):
         controller = CitiesController(self.level.cities)
         controller.run()
         
+    def stopEarly(self):
+        """ Stop performing actions early """
+        self.screen.actionCount = 0
+        
     # Actual actions -- If the Action succeeds this controller should stop
     def moveToACity(self):
         """ Move the Player to a city """
@@ -44,6 +49,7 @@ class PlayerActionController(Controller):
     def treatCurrentCity(self):
         """ Cure the current city """
         self.player.treatDisease()
+        self.screen.actionCount -= 1
         
     def quit(self):
         """ Try to quit the game """
@@ -51,4 +57,4 @@ class PlayerActionController(Controller):
         
     def isRunning(self):
         """ Return if the controller is running """
-        return not self.quitting
+        return not self.quitting and self.screen.actionCount > 0

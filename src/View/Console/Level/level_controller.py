@@ -16,7 +16,6 @@ class LevelController(Controller):
         """ Performa Game Cycle Event """
         player = self.level.players[0]
         
-        #for i in range(4):
         controller = PlayerActionController(self.level, player)
         controller.run()
         
