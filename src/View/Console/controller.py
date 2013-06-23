@@ -18,9 +18,11 @@ class Controller:
         
         while self.isRunning():
             self.performGameCycle()
-            cls()
-            self.screen.display()
-            inputProcessor.processInput(self.commands)
+            
+            if self.isRunning():
+                cls()
+                self.screen.display()
+                inputProcessor.processInput(self.commands)
             
     def stopRunning(self):
         """ Stop running this controller """

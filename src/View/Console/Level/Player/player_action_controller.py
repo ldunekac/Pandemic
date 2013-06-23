@@ -5,6 +5,8 @@ from View.Console.Level.level_view import LevelView
 from View.Console.Level.Player.player_move_controller import PlayerMoveController
 from View.Console.Level.Player.player_action_view import PlayerActionView
 
+from kao_console.ascii import *
+
 class PlayerActionController(Controller):
     """ Controller for a Player to choose his current Actions """
     
@@ -14,6 +16,10 @@ class PlayerActionController(Controller):
         self.level = level
         self.player = player
         
+        self.quitting = False
+        
+        self.commands = {}
+        self.addCommand(ESCAPE, self.quit)
         self.addCommand(ord('1'), self.viewCity)
         self.addCommand(ord('2'), self.viewCities)
         self.addCommand(ord('3'), self.moveToACity)
@@ -38,3 +44,11 @@ class PlayerActionController(Controller):
     def treatCurrentCity(self):
         """ Cure the current city """
         self.player.treatDisease()
+        
+    def quit(self):
+        """ Try to quit the game """
+        self.quitting = True
+        
+    def isRunning(self):
+        """ Return if the controller is running """
+        return not self.quitting

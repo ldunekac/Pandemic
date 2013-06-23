@@ -19,3 +19,6 @@ class LevelController(Controller):
         #for i in range(4):
         controller = PlayerActionController(self.level, player)
         controller.run()
+        
+        if controller.quitting:
+            self.stopRunning()
