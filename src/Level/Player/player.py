@@ -7,6 +7,7 @@ class Player:
     def __init__(self, startingCity):
         """ initializes player class"""
         self.city = startingCity
+        self.hand = []
 
     def moveTo(self, city):
         """Move player to city"""
@@ -15,3 +16,8 @@ class Player:
     def treatDisease(self, disease = None):
         """Cures a disease in their current city"""
         self.city.treatDisease(self.DISEASE_CURE_AMOUNT,disease)
+
+    def addCardToHand(self, card):
+        """ Add the given card to he player's hand """
+        self.hand.append(card)
+        
