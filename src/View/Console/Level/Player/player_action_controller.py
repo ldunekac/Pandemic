@@ -46,12 +46,12 @@ class PlayerActionController(Controller):
         controller = PlayerMoveController(self.player)
         controller.run()
         if controller.actionCompleted:
-            self.screen.actionCount -= 1
+            self.useAction()
         
     def treatCurrentCity(self):
         """ Cure the current city """
         self.player.treatDisease()
-        self.screen.actionCount -= 1
+        self.useAction()
         
     def quit(self):
         """ Try to quit the game """
@@ -60,3 +60,7 @@ class PlayerActionController(Controller):
     def isRunning(self):
         """ Return if the controller is running """
         return not self.quitting and self.screen.actionCount > 0
+    
+    def useAction(self):
+        """ Use an action point """
+        self.screen.actionCount -= 1
