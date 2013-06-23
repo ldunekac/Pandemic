@@ -15,9 +15,12 @@ class PlayerActionView:
         
         print "1. View Current City\r"
         print "2. View Cities\r"
-        print "3. Move City\r"
-        print "4. Treat Current City\r"
-        print "5. Stop Early\r"
+        print "3. Move to Adjacent City\r"
+        print "4. Move to City on Card\r"
+        print "5. Move to City from Card\r"
+        print "6. Treat Current City\r"
+        print "7. Discover Cure\r"
+        print "8. Stop Early\r"
         
     def displayPlayerDetails(self, players):
         """ Display the current player """

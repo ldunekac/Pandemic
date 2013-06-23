@@ -22,9 +22,12 @@ class PlayerActionController(Controller):
         self.addCommand(ESCAPE, self.quit)
         self.addCommand(ord('1'), self.viewCity)
         self.addCommand(ord('2'), self.viewCities)
-        self.addCommand(ord('3'), self.moveToACity)
-        self.addCommand(ord('4'), self.treatCurrentCity)
-        self.addCommand(ord('5'), self.stopEarly)
+        self.addCommand(ord('3'), self.moveToAdjacentCity)
+        self.addCommand(ord('4'), self.moveToCityOnCard)
+        self.addCommand(ord('5'), self.moveFromCityCard)
+        self.addCommand(ord('6'), self.treatCurrentCity)
+        self.addCommand(ord('7'), self.discoverCure)
+        self.addCommand(ord('8'), self.stopEarly)
         
     def viewCity(self):
         """ View the level's cities """
@@ -41,17 +44,26 @@ class PlayerActionController(Controller):
         self.screen.actionCount = 0
         
     # Actual actions -- If the Action succeeds this controller should stop
-    def moveToACity(self):
+    def moveToAdjacentCity(self):
         """ Move the Player to a city """
         controller = PlayerMoveController(self.player)
         controller.run()
         if controller.actionCompleted:
             self.useAction()
+            
+    def moveToCityOnCard(self):
+        """ Move to a city on a card in the player's hand """
+        
+    def moveFromCityCard(self):
+        """ Move to any city from a card for the player's current city """
         
     def treatCurrentCity(self):
         """ Cure the current city """
         self.player.treatDisease()
         self.useAction()
+        
+    def discoverCure(self):
+        """ Discover a cure for the disease """
         
     def quit(self):
         """ Try to quit the game """
