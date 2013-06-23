@@ -12,6 +12,6 @@ class Player:
         """Move player to city"""
         self.city = city
 
-    def cureDisease(self, disease = None):
+    def treatDisease(self, disease = None):
         """Cures a disease in their current city"""
-        self.city.cureDisease(self.DISEASE_CURE_AMOUNT,disease)
+        self.city.treatDisease(self.DISEASE_CURE_AMOUNT,disease)
