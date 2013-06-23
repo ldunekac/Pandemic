@@ -11,6 +11,8 @@ class PlayerActionView:
     def display(self):
         """ Display the Player action options """
         self.displayPlayerDetails(self.level.players)
+        self.displayHand()
+        
         print "1. View Current City\r"
         print "2. View Cities\r"
         print "3. Move City\r"
@@ -26,5 +28,13 @@ class PlayerActionView:
         for player in players:
             if player is not self.player:
                 print "Player: {0}\r".format(player.city)
+        print
+        
+    def displayHand(self):
+        """ Display the player's hand """
+        print "Hand:\r"
+        
+        for card in self.player.hand:
+            print card, "\r"
         print
         

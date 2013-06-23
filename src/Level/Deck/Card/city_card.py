@@ -12,3 +12,7 @@ class CityCard(Card):
 
     def onPlay(self):
         """ Do nothing when played """
+        
+    def __repr__(self):
+        """ Return the String representtaion of the City Card """
+        return str(self.city)
