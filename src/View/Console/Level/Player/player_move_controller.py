@@ -9,6 +9,7 @@ class PlayerMoveController(Controller):
         """ Initialize the Player Move Controller """
         Controller.__init__(self, PlayerMoveView(player))
         self.player = player
+        self.actionCompleted = False
         
         self.addCommand(ord('0'), self.moveToCityZero)
         self.addCommand(ord('1'), self.moveToCityOne)
@@ -66,4 +67,5 @@ class PlayerMoveController(Controller):
         city = self.screen.getCity(index)
         if city is not None:
             self.player.moveTo(city)
+            self.actionCompleted = True
             self.stopRunning()

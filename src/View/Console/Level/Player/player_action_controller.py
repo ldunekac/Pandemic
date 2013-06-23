@@ -45,6 +45,8 @@ class PlayerActionController(Controller):
         """ Move the Player to a city """
         controller = PlayerMoveController(self.player)
         controller.run()
+        if controller.actionCompleted:
+            self.screen.actionCount -= 1
         
     def treatCurrentCity(self):
         """ Cure the current city """
