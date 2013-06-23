@@ -4,6 +4,7 @@ from View.Console.controller import Controller
 from View.Console.Level.level_view import LevelView
 from View.Console.Level.Infection.infection_controller import InfectionController
 from View.Console.Level.Player.player_action_controller import PlayerActionController
+from View.Console.Level.Player.player_draw_controller import PlayerDrawController
 
 class LevelController(Controller):
     """ Controller for the level """
@@ -16,7 +17,7 @@ class LevelController(Controller):
             
     def performGameCycle(self):
         """ Perform a Game Cycle Event """
-        gameLoopActions = [self.doPlayerActions, self.infectACity, self.infectACity]
+        gameLoopActions = [self.doPlayerActions, self.drawPlayerCard, self.drawPlayerCard, self.infectACity, self.infectACity]
         gameLoopActions[self.gameLoopActionIndex]()
         self.gameLoopActionIndex += 1
         self.gameLoopActionIndex %= len(gameLoopActions)
@@ -39,4 +40,12 @@ class LevelController(Controller):
         infectedCity = self.level.infectionDeck.draw()
         if infectedCity is not None:
             controller = InfectionController(infectedCity)
+            controller.run()
+            
+    def drawPlayerCard(self):
+        """ Draw a card for the current player """
+        player = self.level.players[0]
+        card = self.level.playerDeck.draw()
+        if card is not None:
+            controller = PlayerDrawController(player, card)
             controller.run()

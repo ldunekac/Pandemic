@@ -1,5 +1,7 @@
 from View.Console.controller import Controller
-from View.Console.player_draw_view import PlayerDrawView
+from View.Console.Level.Player.player_draw_view import PlayerDrawView
+
+from kao_console.ascii import *
 
 class PlayerDrawController(Controller):
     """ Controller for the Player Drawing """
