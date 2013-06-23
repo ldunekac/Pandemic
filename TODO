@@ -1,8 +1,12 @@
-- Game Flow Logic
+- Game Flow Logic -- DONE 
 - Player Deck
-    - Just cities
-    - Player's hand
+    - Just cities -- DONE
+    - Player's hand -- DONE
     - Player Actions based on city cards
+        - Move to city on card -- DONE
+        - Move to city from card
+        - Discover Cure
+    - Force Player to discard down to 7 after drawing both cards
 - Disease Counts
 - Outbreaks
 - Infection Rate
