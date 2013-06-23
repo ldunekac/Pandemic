@@ -12,9 +12,20 @@ class LevelController(Controller):
         """ Initialize the Level Controller """
         self.level = Level()
         Controller.__init__(self, LevelView(self.level))
+        self.gameLoopActionIndex = 0
             
     def performGameCycle(self):
         """ Perform a Game Cycle Event """
+        gameLoopActions = [self.doPlayerActions, self.infectACity, self.infectACity]
+        gameLoopActions[self.gameLoopActionIndex]()
+        self.gameLoopActionIndex += 1
+        self.gameLoopActionIndex %= len(gameLoopActions)
+        
+    def handleInput(self):
+        """ Do Nothing """
+                
+    def doPlayerActions(self):
+        """ Perform Player Actions """
         player = self.level.players[0]
         
         controller = PlayerActionController(self.level, player)
@@ -22,9 +33,10 @@ class LevelController(Controller):
         
         if controller.quitting:
             self.stopRunning()
-            
-        for i in range(2):
-            infectedCity = self.level.infectionDeck.draw()
-            if infectedCity is not None:
-                controller = InfectionController(infectedCity)
-                controller.run()
+        
+    def infectACity(self):
+        """ Infect a City """
+        infectedCity = self.level.infectionDeck.draw()
+        if infectedCity is not None:
+            controller = InfectionController(infectedCity)
+            controller.run()
