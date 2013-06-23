@@ -1,5 +1,7 @@
 from Level.city import City
 from Level.Deck.infection_deck import InfectionDeck
+from Level.Deck.player_deck import PlayerDeck
+from Level.Deck.Card.city_card import CityCard
 from Level.Disease.disease import Disease
 from Level.Player.player import Player
 
@@ -87,8 +89,12 @@ class Level:
                 
     def setupPlayerDeck(self):
         """ Setup the player Deck """
-        #self.playerDeck = PlayerDeck()
-        #self.playerDeck.shuffle()
+        cityCards = []
+        for city in self.cities:
+            cityCards.append(CityCard(city))
+        
+        self.playerDeck = PlayerDeck(cityCards)
+        self.playerDeck.shuffle()
                 
     def setupPlayers(self):
         """ Setup Players """

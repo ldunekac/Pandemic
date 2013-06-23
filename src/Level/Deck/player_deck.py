@@ -1,7 +1,6 @@
-
 from deck import deck
 
-class player_deck(Deck):
+class PlayerDeck(Deck):
 
     def __init__(self, deck):
         Deck.__init__(self, deck)
