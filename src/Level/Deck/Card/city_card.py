@@ -1,4 +1,4 @@
-from card import card
+from card import Card
 
 class CityCard(Card):
     TYPE = "CITY"
