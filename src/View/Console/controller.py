@@ -22,7 +22,7 @@ class Controller:
             if self.isRunning():
                 cls()
                 self.screen.display()
-                inputProcessor.processInput(self.commands)
+                self.handleInput()
             
     def stopRunning(self):
         """ Stop running this controller """
@@ -33,7 +33,11 @@ class Controller:
         return self.running
         
     def performGameCycle(self):
-        """ Performa Game Cycle Event """
+        """ Perform a Game Cycle Event """
+        
+    def handleInput(self):
+        """ Handle User Input """
+        inputProcessor.processInput(self.commands)
         
     def addCommand(self, character, command):
         """ Add the given command to happen on the given character """
