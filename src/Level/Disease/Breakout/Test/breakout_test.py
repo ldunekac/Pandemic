@@ -17,7 +17,7 @@ class breakout(unittest.TestCase):
         self.city1.addAdjacentCity(self.city2)
         self.city1.addAdjacentCity(self.city3)
         
-        self.breakout = Breakout(self.city1, self.disease)
+        self.breakout = Breakout(self.city1)
         
     def infect(self):
         """ Test that the adjacent cities are infected """
@@ -32,7 +32,8 @@ class breakout(unittest.TestCase):
     def multiDisease(self):
         """ Test that the adjacent cities are infected """
         disease2 = Disease()
-        self.breakout = Breakout(self.city1, disease2)
+        self.city1.disease = disease2
+        self.breakout = Breakout(self.city1)
         self.breakout.breakout()
         
         assert self.city2.disease not in self.city2.diseaseCounts, "City 2 should not be infected with its own disease"
