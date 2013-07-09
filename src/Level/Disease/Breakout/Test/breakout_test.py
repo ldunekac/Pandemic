@@ -17,7 +17,8 @@ class breakout(unittest.TestCase):
         self.city1.addAdjacentCity(self.city2)
         self.city1.addAdjacentCity(self.city3)
         
-        self.breakout = Breakout(self.city1, self.disease)
+        self.citiesHitByBreakout = set()
+        self.breakout = Breakout(self.city1, self.disease, self.citiesHitByBreakout)
         
     def infect(self):
         """ Test that the adjacent cities are infected """
@@ -32,16 +33,24 @@ class breakout(unittest.TestCase):
     def multiDisease(self):
         """ Test that the adjacent cities are infected """
         disease2 = Disease()
-        self.breakout = Breakout(self.city1, disease2)
+        self.breakout = Breakout(self.city1, disease2, self.citiesHitByBreakout)
         self.breakout.breakout()
         
         assert self.city2.disease not in self.city2.diseaseCounts, "City 2 should not be infected with its own disease"
         assert self.city3.disease not in self.city3.diseaseCounts, "City 3 should not be infected with its own disease"
         assert self.city2.diseaseCounts[disease2] == 1, "City 2 should have been infected once by Disease 2"
         assert self.city3.diseaseCounts[disease2] == 1, "City 3 should have been infected once by Disease 2"
+        
+    def citiesHitByBreakout(self):
+        """ Test that the adjacent cities are infected """
+        self.breakout.breakout()
+        
+        assert self.city1 in self.citiesHitByBreakout, "City 1 should be in the list of cities hit by the breakout"
+        assert self.city2 in self.citiesHitByBreakout, "City 2 should be in the list of cities hit by the breakout"
+        assert self.city3 in self.citiesHitByBreakout, "City 3 should be in the list of cities hit by the breakout"
 
 # Collect all test cases in this class
-testcasesBreakout = ["infect", "multiDisease"]
+testcasesBreakout = ["infect", "multiDisease", "citiesHitByBreakout"]
 suiteBreakout = unittest.TestSuite(map(breakout, testcasesBreakout))
 
 ##########################################################
