@@ -31,7 +31,7 @@ class breakout(unittest.TestCase):
         assert self.city3.diseaseCounts[self.disease] == 1, "City 3 should have been infected once"
         
     def multiDisease(self):
-        """ Test that the adjacent cities are infected """
+        """ Test that the adjacent cities are infected with the outbreak disease """
         disease2 = Disease()
         self.breakout = Breakout(self.city1, disease2, self.citiesHitByBreakout)
         self.breakout.breakout()
@@ -48,9 +48,17 @@ class breakout(unittest.TestCase):
         assert self.city1 in self.citiesHitByBreakout, "City 1 should be in the list of cities hit by the breakout"
         assert self.city2 in self.citiesHitByBreakout, "City 2 should be in the list of cities hit by the breakout"
         assert self.city3 in self.citiesHitByBreakout, "City 3 should be in the list of cities hit by the breakout"
+        
+    def ignoreCitiesAlreadyHit(self):
+        """ Test that the adjacent cities are infected """
+        self.breakout.citiesHitByBreakout = set([self.city1, self.city3])
+        self.breakout.breakout()
+        
+        assert self.city2.diseaseCounts[self.disease] == 1, "City 2 should have been infected once"
+        assert self.disease not in self.city3.diseaseCounts, "City 3 should have not been infected"
 
 # Collect all test cases in this class
-testcasesBreakout = ["infect", "multiDisease", "citiesHitByBreakout"]
+testcasesBreakout = ["infect", "multiDisease", "citiesHitByBreakout", "ignoreCitiesAlreadyHit"]
 suiteBreakout = unittest.TestSuite(map(breakout, testcasesBreakout))
 
 ##########################################################
