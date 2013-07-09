@@ -1,8 +1,8 @@
 import unittest
 
 from Level.Disease.Test.disease_test import suite as diease_suite
-from Level.Disease.Breakout.Test.suite import suite as breakout_suite
+from Level.Disease.Outbreak.Test.suite import suite as outbreak_suite
 
 suites = [diease_suite,
-          breakout_suite]
+          outbreak_suite]
 suite = unittest.TestSuite(suites)
