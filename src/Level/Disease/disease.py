@@ -1,7 +1,6 @@
 
 class Disease:
-    """ Represents a disease in a level of the game """
-    
+    """ Represents a disease in a level of the game """    
     AMOUNT_OF_DISEASE = 24
 
     def __init__(self):
