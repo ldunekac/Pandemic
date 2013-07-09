@@ -17,7 +17,7 @@ class breakout(unittest.TestCase):
         self.city1.addAdjacentCity(self.city2)
         self.city1.addAdjacentCity(self.city3)
         
-        self.breakout = Breakout(self.city1)
+        self.breakout = Breakout(self.city1, self.disease)
         
     def infect(self):
         """ Test that the adjacent cities are infected """
@@ -28,9 +28,20 @@ class breakout(unittest.TestCase):
         
         assert self.city2.diseaseCounts[self.disease] == 1, "City 2 should have been infected once"
         assert self.city3.diseaseCounts[self.disease] == 1, "City 3 should have been infected once"
+        
+    def multiDisease(self):
+        """ Test that the adjacent cities are infected """
+        disease2 = Disease()
+        self.breakout = Breakout(self.city1, disease2)
+        self.breakout.breakout()
+        
+        assert self.city2.disease not in self.city2.diseaseCounts, "City 2 should not be infected with its own disease"
+        assert self.city3.disease not in self.city3.diseaseCounts, "City 3 should not be infected with its own disease"
+        assert self.city2.diseaseCounts[disease2] == 1, "City 2 should have been infected once by Disease 2"
+        assert self.city3.diseaseCounts[disease2] == 1, "City 3 should have been infected once by Disease 2"
 
 # Collect all test cases in this class
-testcasesBreakout = ["infect"]
+testcasesBreakout = ["infect", "multiDisease"]
 suiteBreakout = unittest.TestSuite(map(breakout, testcasesBreakout))
 
 ##########################################################
