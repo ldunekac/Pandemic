@@ -1,3 +1,4 @@
+from Level.Disease.Outbreak.outbreak_manager import TheOutbreakManager
 
 class City:
     """ Represents a city in the level """
@@ -26,6 +27,7 @@ class City:
             maxAmountThatCanBeAdded = self.MAX_DISEASE_COUNT - self.diseaseCounts[disease]
             if amount > maxAmountThatCanBeAdded:
                 amount = maxAmountThatCanBeAdded
+                TheOutbreakManager.startOutbreak(self, disease)
             self.diseaseCounts[disease] += amount
         else:
             self.diseaseCounts[disease] = amount

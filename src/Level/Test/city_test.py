@@ -1,5 +1,8 @@
 from Level.city import City
 from Level.Disease.disease import Disease
+from Level.Disease.Outbreak.outbreak_manager import TheOutbreakManager
+
+from Test.test_helper import GetCityList
 
 import unittest
 
@@ -30,6 +33,7 @@ class infect(unittest.TestCase):
         """ Build the *** for the test """
         self.disease = Disease()
         self.city = City("Blah", self.disease)
+        self.cities = GetCityList()
         
     def infectCountIncreased(self):
         """ Test that a city's disease count increases by the specified amount """
@@ -38,9 +42,17 @@ class infect(unittest.TestCase):
         self.city.infect(amount)
         
         assert self.city.diseaseCounts[self.disease] == amount, "City infection should increase by the amount given"
+        
+    def outbreak(self):
+        """ Test that a city can start an outbreak """
+        amount = 1
+        self.cities[0].diseaseCounts[self.cities[0].disease] = 3
+        self.cities[0].infect(amount)
+        
+        assert TheOutbreakManager.totalOutbreaks == 1, "Should have had a single outbreak"
 
 # Collect all test cases in this class
-testcasesInfect = ["infectCountIncreased"]
+testcasesInfect = ["infectCountIncreased", "outbreak"]
 suiteInfect = unittest.TestSuite(map(infect, testcasesInfect))
 
 ##########################################################
