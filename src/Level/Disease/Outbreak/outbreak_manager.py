@@ -8,6 +8,7 @@ class OutbreakManager:
     def __init__(self):
         """ Initialize the Breakout Manager """
         self.concurrentOutbreakCount = 0
+        self.totalOutbreaks = 0
         self.citiesInCurrentOutbreak = set()
         
     def startOutbreak(self, city, disease):
@@ -22,5 +23,8 @@ class OutbreakManager:
     def outbreak(self, city, disease):
         """ Perform asingle outbreak """
         self.concurrentOutbreakCount += 1
+        self.totalOutbreaks += 1
         yield Outbreak(city, disease, self.citiesInCurrentOutbreak)
         self.concurrentOutbreakCount -= 1
+        
+TheOutbreakManager = OutbreakManager()

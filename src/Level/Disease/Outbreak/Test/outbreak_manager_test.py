@@ -17,7 +17,7 @@ class outbreak(unittest.TestCase):
             assert self.outbreakManager.concurrentOutbreakCount == 1, "Concurrent Outbreak Counter should have increased to 1"
         assert self.outbreakManager.concurrentOutbreakCount == 0, "Concurrent Outbreak Counter should have decreased to 0"
         
-    def multipleOutbreaks(self):
+    def concurrentOutbreakCounter_Multiple(self):
         """ Test that the concurrent outbreak counter is properly set when there are multiple outbreaks """
         with self.outbreakManager.outbreak(None, None) as outbreak:
             assert self.outbreakManager.concurrentOutbreakCount == 1, "Concurrent Outbreak Counter should have increased to 1"
@@ -25,9 +25,24 @@ class outbreak(unittest.TestCase):
                 assert self.outbreakManager.concurrentOutbreakCount == 2, "Concurrent Outbreak Counter should have increased to 2"
             assert self.outbreakManager.concurrentOutbreakCount == 1, "Concurrent Outbreak Counter should have decreased back to 1"
         assert self.outbreakManager.concurrentOutbreakCount == 0, "Concurrent Outbreak Counter should have decreased to 0"
+        
+    def totalOutbreakCounter(self):
+        """ Test that the total outbreak counter is properly set """
+        with self.outbreakManager.outbreak(None, None) as outbreak:
+            assert self.outbreakManager.totalOutbreaks == 1, "Total Outbreak Counter should have increased to 1"
+        assert self.outbreakManager.totalOutbreaks == 1, "Toatl Outbreak Counter should stay at 1"
+        
+    def totalOutbreakCounter_Multiple(self):
+        """ Test that the total outbreak counter is properly set when there are multiple outbreaks """
+        with self.outbreakManager.outbreak(None, None) as outbreak:
+            assert self.outbreakManager.totalOutbreaks == 1, "Total Outbreak Counter should have increased to 1"
+            with self.outbreakManager.outbreak(None, None) as outbreak:
+                assert self.outbreakManager.totalOutbreaks == 2, "Total Outbreak Counter should have increased to 2"
+            assert self.outbreakManager.totalOutbreaks == 2, "Total Outbreak Counter should stay at 2"
+        assert self.outbreakManager.totalOutbreaks == 2, "Total Outbreak Counter should stay at 2"
 
 # Collect all test cases in this class
-testcasesOutbreak = ["concurrentOutbreakCounter", "multipleOutbreaks"]
+testcasesOutbreak = ["concurrentOutbreakCounter", "concurrentOutbreakCounter_Multiple", "totalOutbreakCounter", "totalOutbreakCounter_Multiple"]
 suiteOutbreak = unittest.TestSuite(map(outbreak, testcasesOutbreak))
 
 ##########################################################
