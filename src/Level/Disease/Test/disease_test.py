@@ -194,7 +194,7 @@ class diseaseCounterIncrease(unittest.TestCase):
 
         self.reset()
         self.chicago.infect(3)
-        self.disease1.cureDisease()
+        self.disease1.cure()
         assert self.disease1.isEradicated() == False, "Disease 1 was eradicated before all cubes where returned to it"
         self.chicago.treat(1)
 
@@ -203,7 +203,7 @@ class diseaseCounterIncrease(unittest.TestCase):
         # disease is cured when it no cubes are no the board
         # make sure disease 2 is full
         assert self.disease2.cubeCount == 24 , "Disease 2 cubes is not full"
-        self.disease2.cureDisease()
+        self.disease2.cure()
         assert self.disease2.eradicated == True, "Disease 2 is not eradicated when the disease is cured and it has all of its pieces"
 
 
@@ -216,8 +216,39 @@ suiteDiseaseCounterIncrease = unittest.TestSuite(map(diseaseCounterIncrease, tes
 
 ##########################################################
 
+class checkIfEradicated(unittest.TestCase):
+    """ Test cases of checkIfEradicated """
+    
+    def  setUp(self):
+        """ Build the disease for the test """
+        self.disease = Disease()
+        
+    def eradicated(self):
+        """ Test that the disease is eradicated """
+        self.disease.cure()
+        self.disease.checkIfEradicated()
+        assert self.disease.eradicated, "Disease should be eradicated"
+        
+    def notEradicated_NotCured(self):
+        """ Test that the disease is not eradicated when it is not cured """
+        self.disease.checkIfEradicated()
+        assert not self.disease.eradicated, "Disease should not be eradicated if it is not cured"
+        
+    def notEradicated_StillInfected(self):
+        """ Test that the disease is not eradicated when it is not cured """
+        self.disease.removeCubes(1)
+        self.disease.checkIfEradicated()
+        assert not self.disease.eradicated, "Disease should not be eradicated if there are still people infected with it"
+
+# Collect all test cases in this class
+testcasesCheckIfEradicated = ["eradicated", "notEradicated_NotCured"]
+suiteCheckIfEradicated = unittest.TestSuite(map(checkIfEradicated, testcasesCheckIfEradicated))
+
+##########################################################
+
 # Collect all test cases in this file
-suites = [suiteDiseaseCounterDecrease, suiteDiseaseCounterIncrease]
+suites = [suiteDiseaseCounterDecrease, suiteDiseaseCounterIncrease,
+          suiteCheckIfEradicated]
 suite = unittest.TestSuite(suites)
 
 if __name__ == "__main__":

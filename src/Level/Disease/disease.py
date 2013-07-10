@@ -20,7 +20,7 @@ class Disease:
         self.cubeCount += amount
         self.checkIfEradicated()
 
-    def cureDisease(self):
+    def cure(self):
         self.cured = True
         self.checkIfEradicated()
 
@@ -32,5 +32,5 @@ class Disease:
 
     def checkIfEradicated(self):
         """ Check if the disease has been eradicated """
-        if self.cubeCount == self.AMOUNT_OF_DISEASE:
+        if self.cured and self.cubeCount == self.AMOUNT_OF_DISEASE:
             self.eradicated = True 
