@@ -1,3 +1,4 @@
+from Level.City.city_infection_delegate import CityInfectionDelegate
 from Level.Disease.Outbreak.outbreak_manager import TheOutbreakManager
 
 class City:
@@ -11,29 +12,15 @@ class City:
         self.adjacentCities = set()
         self.diseaseCounts = {}
         
+        self.infectionDelegate = CityInfectionDelegate(self)
+        
     def addAdjacentCity(self, city):
         """ Add a city to this city's adjacency list """
         self.adjacentCities.add(city)
         
     def infect(self, amount, disease=None):
         """ Infect the city with given amount """
-        if amount > self.MAX_INFECTIONS_PER_DISEASE:
-            amount = self.MAX_INFECTIONS_PER_DISEASE
-
-        if disease is None:
-            disease = self.disease
-            
-        if disease in self.diseaseCounts:
-            maxAmountThatCanBeAdded = self.MAX_INFECTIONS_PER_DISEASE - self.diseaseCounts[disease]
-            if amount > maxAmountThatCanBeAdded:
-                amount = maxAmountThatCanBeAdded
-                TheOutbreakManager.startOutbreak(self, disease)
-            self.diseaseCounts[disease] += amount
-        else:
-            self.diseaseCounts[disease] = amount
-
-        disease.removeCubes(amount)
-        # Will need to check for outbreaks at some point
+        self.infectionDelegate.infect(amount, disease)
 
     def treat(self, amount, disease = None):
         """ Cures a city of a disease by a given amount"""

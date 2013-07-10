@@ -16,7 +16,7 @@ class CityInfectionDelegate:
         if disease in self.city.diseaseCounts:
             if self.shouldOutbreak(amount, disease):
                 amount = self.MAX_INFECTIONS_PER_DISEASE - self.city.diseaseCounts[disease]
-                TheOutbreakManager.startOutbreak(self, disease)
+                TheOutbreakManager.startOutbreak(self.city, disease)
         self.increaseInfections(amount, disease)
         
     def normalizeAmount(self, amount):
