@@ -246,9 +246,30 @@ suiteCheckIfEradicated = unittest.TestSuite(map(checkIfEradicated, testcasesChec
 
 ##########################################################
 
+class addCubes(unittest.TestCase):
+    """ Test cases of addCubes """
+    
+    def  setUp(self):
+        """ Build the Disease for the test """
+        self.disease = Disease()
+        
+    def cubesAdded(self):
+        """ Test that cubes are properly added """
+        amount = 3
+        self.disease.cubeCount = 0
+        self.disease.addCubes(amount)
+        assert self.disease.cubeCount == amount, "The disease should have more cubes"
+
+# Collect all test cases in this class
+testcasesAddCubes = ["cubesAdded"]
+suiteAddCubes = unittest.TestSuite(map(addCubes, testcasesAddCubes))
+
+##########################################################
+
 # Collect all test cases in this file
 suites = [suiteDiseaseCounterDecrease, suiteDiseaseCounterIncrease,
-          suiteCheckIfEradicated]
+          suiteCheckIfEradicated,
+          suiteAddCubes]
 suite = unittest.TestSuite(suites)
 
 if __name__ == "__main__":
