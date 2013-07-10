@@ -41,7 +41,12 @@ class startOutbreak(unittest.TestCase):
         self.cities = GetCityList()
         
     def singleOutbreak_ConcurrentOutbreakCount(self):
-        """ Test that a single outbreak has the concurrentOutbreakCOunt set properly"""
+        """ Test that a single outbreak has the concurrentOutbreakCount set properly"""
+        self.startOutbreak()
+        assert self.outbreakManager.concurrentOutbreakCount == 0, "Outbreak Count should always be zero after a single infection"
+        
+    def concurrentOutbreakCount(self):
+        """ Test that a single outbreak has the concurrentOutbreakCount set properly"""
         self.startOutbreak()
         assert self.outbreakManager.concurrentOutbreakCount == 0, "Outbreak Count should always be zero after a single infection"
         
@@ -50,7 +55,7 @@ class startOutbreak(unittest.TestCase):
         self.outbreakManager.startOutbreak(self.cities[0], self.cities[0].disease)
 
 # Collect all test cases in this class
-testcasesStartOutbreak = ["singleOutbreak_ConcurrentOutbreakCount"]
+testcasesStartOutbreak = ["concurrentOutbreakCount"]
 suiteStartOutbreak = unittest.TestSuite(map(startOutbreak, testcasesStartOutbreak))
 
 ##########################################################
