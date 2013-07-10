@@ -216,10 +216,6 @@ suiteDiseaseCounterIncrease = unittest.TestSuite(map(diseaseCounterIncrease, tes
 
 ##########################################################
 
-
-
-
-
 # Collect all test cases in this file
 suites = [suiteDiseaseCounterDecrease, suiteDiseaseCounterIncrease]
 suite = unittest.TestSuite(suites)
