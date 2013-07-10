@@ -117,7 +117,6 @@ class diseaseCounterDecrease(unittest.TestCase):
 
         assert self.disease1.cubeCount == 0, "Disease was not decreased correctally"
 
-
 # Collect all test cases in this class
 testcasesDiseaseCounterDecrease = ["decreaseDiseaseCounter", 
                                     "checkOverflow",
