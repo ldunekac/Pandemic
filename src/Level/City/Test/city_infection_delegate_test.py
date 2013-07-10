@@ -3,8 +3,46 @@ import unittest
 from Level.City.city import City
 from Level.City.city_infection_delegate import CityInfectionDelegate
 from Level.Disease.disease import Disease
+from Level.Disease.Outbreak.outbreak_manager import TheOutbreakManager
 
-from Test.test_helper import BuildCityInfectionDelegate
+from Test.test_helper import BuildCityInfectionDelegate, GetCityList
+
+class infect(unittest.TestCase):
+    """ Test cases of infect """
+    
+    def  setUp(self):
+        """ Build the Infection Delegate for the test """
+        self.cities = GetCityList()
+        self.infectionDelegate = BuildCityInfectionDelegate(self.cities[0])
+        TheOutbreakManager.reset()
+        
+    def outbreak(self):
+        """ Test that a city can start an outbreak """
+        assert TheOutbreakManager.totalOutbreaks == 0, "Should have no outbreaks at start"
+        amount = 1
+        self.cities[0].diseaseCounts[self.cities[0].disease] = City.MAX_INFECTIONS_PER_DISEASE
+        self.cities[0].infect(amount)
+        
+        assert TheOutbreakManager.totalOutbreaks == 1, "Should have had a single outbreak"
+        
+    def cascadingOutbreak(self):
+        """ Test that a city can cascade an outbreak """
+        assert TheOutbreakManager.totalOutbreaks == 0, "Should have no outbreaks at start"
+        
+        amount = 1
+        self.cities[0].diseaseCounts[self.cities[0].disease] = City.MAX_INFECTIONS_PER_DISEASE
+        for city in self.cities[0].adjacentCities:
+            city.diseaseCounts[self.cities[0].disease] = City.MAX_INFECTIONS_PER_DISEASE
+            break
+        self.cities[0].infect(amount)
+        
+        assert TheOutbreakManager.totalOutbreaks == 2, "Should have had 2 outbreak"
+
+# Collect all test cases in this class
+testcasesInfect = ["outbreak", "cascadingOutbreak"]
+suiteInfect = unittest.TestSuite(map(infect, testcasesInfect))
+
+##########################################################
 
 class shouldOutbreak(unittest.TestCase):
     """ Test cases of shouldOutbreak """
@@ -97,7 +135,8 @@ suiteGetDiseaseToInfectWith = unittest.TestSuite(map(getDiseaseToInfectWith, tes
 # Collect all test cases in this file
 suites = [suiteShouldOutbreak,
           suiteIncreaseInfections,
-          suiteGetDiseaseToInfectWith]
+          suiteGetDiseaseToInfectWith,
+          suiteInfect]
 suite = unittest.TestSuite(suites)
 
 if __name__ == "__main__":

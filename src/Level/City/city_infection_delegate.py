@@ -1,3 +1,4 @@
+from Level.Disease.Outbreak.outbreak_manager import TheOutbreakManager
 
 class CityInfectionDelegate:
     """ Delegate to handle infecting a city """
