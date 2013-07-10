@@ -35,6 +35,8 @@ class infect(unittest.TestCase):
         self.city = City("Blah", self.disease)
         self.cities = GetCityList()
         
+        TheOutbreakManager.reset()
+        
     def infectCountIncreased(self):
         """ Test that a city's disease count increases by the specified amount """
         amount = 2
@@ -45,14 +47,28 @@ class infect(unittest.TestCase):
         
     def outbreak(self):
         """ Test that a city can start an outbreak """
+        assert TheOutbreakManager.totalOutbreaks == 0, "Should have no outbreaks at start"
         amount = 1
         self.cities[0].diseaseCounts[self.cities[0].disease] = 3
         self.cities[0].infect(amount)
         
         assert TheOutbreakManager.totalOutbreaks == 1, "Should have had a single outbreak"
+        
+    def cascadingOutbreak(self):
+        """ Test that a city can cascade an outbreak """
+        assert TheOutbreakManager.totalOutbreaks == 0, "Should have no outbreaks at start"
+        
+        amount = 1
+        self.cities[0].diseaseCounts[self.cities[0].disease] = 3
+        for city in self.cities[0].adjacentCities:
+            city.diseaseCounts[self.cities[0].disease] = 3
+            break
+        self.cities[0].infect(amount)
+        
+        assert TheOutbreakManager.totalOutbreaks == 2, "Should have had 2 outbreak"
 
 # Collect all test cases in this class
-testcasesInfect = ["infectCountIncreased", "outbreak"]
+testcasesInfect = ["infectCountIncreased", "outbreak", "cascadingOutbreak"]
 suiteInfect = unittest.TestSuite(map(infect, testcasesInfect))
 
 ##########################################################
