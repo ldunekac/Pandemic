@@ -72,9 +72,32 @@ suiteIncreaseInfections = unittest.TestSuite(map(increaseInfections, testcasesIn
 
 ##########################################################
 
+class getDiseaseToInfectWith(unittest.TestCase):
+    """ Test cases of getDiseaseToInfectWith """
+    
+    def  setUp(self):
+        """ Build the Infection Delegate for the test """
+        self.infectionDelegate = BuildCityInfectionDelegate()
+        
+    def none(self):
+        """ Test that the city's disease is returned when the given disease is None """
+        assert self.infectionDelegate.getDiseaseToInfectWith(None) is self.infectionDelegate.city.disease, "Should return the city's disease when no disease is passed in"
+        
+    def disease(self):
+        """ Test that the disease passed in is returned """
+        disease = Disease()
+        assert self.infectionDelegate.getDiseaseToInfectWith(disease) is disease, "Should return the provided disease"
+
+# Collect all test cases in this class
+testcasesGetDiseaseToInfectWith = ["none", "disease"]
+suiteGetDiseaseToInfectWith = unittest.TestSuite(map(getDiseaseToInfectWith, testcasesGetDiseaseToInfectWith))
+
+##########################################################
+
 # Collect all test cases in this file
 suites = [suiteShouldOutbreak,
-          suiteIncreaseInfections]
+          suiteIncreaseInfections,
+          suiteGetDiseaseToInfectWith]
 suite = unittest.TestSuite(suites)
 
 if __name__ == "__main__":
