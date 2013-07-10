@@ -54,6 +54,13 @@ class City:
                 self.diseaseCounts[disease] -= amount
                 disease.addCubes(amount)
         
+    def getDiseaseInfections(self, disease):
+        """ Return the number of infections in the city of for the given disease """
+        amount = 0
+        if disease in self.diseaseCounts:
+            amount = self.diseaseCounts[disease]
+        return amount
+        
     def __repr__(self):
         """ Return the string representtation of the City """
         return self.name
