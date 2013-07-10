@@ -10,7 +10,7 @@ class shouldOutbreak(unittest.TestCase):
     """ Test cases of shouldOutbreak """
     
     def  setUp(self):
-        """ Build the *** for the test """
+        """ Build the Infection Delegate for the test """
         self.infectionDelegate = BuildCityInfectionDelegate()
         
     def noOutbreak(self):
@@ -31,8 +31,50 @@ suiteShouldOutbreak = unittest.TestSuite(map(shouldOutbreak, testcasesShouldOutb
 
 ##########################################################
 
+class increaseInfections(unittest.TestCase):
+    """ Test cases of increaseInfections """
+    
+    def  setUp(self):
+        """ Build the Infection Delegate for the test """
+        self.infectionDelegate = BuildCityInfectionDelegate()
+        
+    def diseaseCountIncreased_NewDisease(self):
+        """ Test that the disease count increases properly """
+        disease = Disease()
+        amount = 1
+        
+        assert disease not in self.infectionDelegate.city.diseaseCounts, "Should not have any infections of the given disease"
+        self.infectionDelegate.increaseInfections(amount, disease)
+        assert self.infectionDelegate.city.getDiseaseInfections(disease) == amount, "Should have been infected by the amount given"
+        
+    def diseaseCountIncreased_PreviousDisease(self):
+        """ Test that the disease count increases properly """
+        disease = Disease()
+        startingAmount = 1
+        amount = 1
+        self.infectionDelegate.city.diseaseCounts[disease] = startingAmount
+        
+        self.infectionDelegate.increaseInfections(amount, disease)
+        assert self.infectionDelegate.city.getDiseaseInfections(disease) == startingAmount+amount, "Disease Count should have increased by the amount given"
+        
+    def diseaseCubesRemoved(self):
+        """ Test that the disease cubes are removed properly """
+        disease = Disease()
+        amount = 2
+        startingCubeCount = disease.cubeCount
+        
+        self.infectionDelegate.increaseInfections(amount, disease)
+        assert disease.cubeCount == startingCubeCount-amount, "The cube count should now be decreased by the infection amount"
+
+# Collect all test cases in this class
+testcasesIncreaseInfections = ["diseaseCountIncreased_NewDisease", "diseaseCountIncreased_PreviousDisease", "diseaseCubesRemoved"]
+suiteIncreaseInfections = unittest.TestSuite(map(increaseInfections, testcasesIncreaseInfections))
+
+##########################################################
+
 # Collect all test cases in this file
-suites = [suiteShouldOutbreak]
+suites = [suiteShouldOutbreak,
+          suiteIncreaseInfections]
 suite = unittest.TestSuite(suites)
 
 if __name__ == "__main__":
