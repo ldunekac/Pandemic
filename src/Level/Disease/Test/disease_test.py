@@ -1,6 +1,6 @@
 import unittest
 
-from Level.city import City
+from Level.City.city import City
 from Level.Disease.disease import Disease
 
 """

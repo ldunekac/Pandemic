@@ -1,4 +1,4 @@
-from Level.city import City
+from Level.City.city import City
 from Level.Disease.disease import Disease
 from Level.Disease.Outbreak.outbreak_manager import TheOutbreakManager
 

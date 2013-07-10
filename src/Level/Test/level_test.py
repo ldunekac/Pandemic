@@ -1,4 +1,4 @@
-from Level.city import City
+from Level.City.city import City
 from Level.level import Level
 
 import unittest

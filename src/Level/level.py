@@ -1,4 +1,4 @@
-from Level.city import City
+from Level.City.city import City
 from Level.Deck.infection_deck import InfectionDeck
 from Level.Deck.player_deck import PlayerDeck
 from Level.Deck.Card.city_card import CityCard

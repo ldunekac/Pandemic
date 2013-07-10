@@ -1,5 +1,5 @@
 import unittest
-from Level.city import City
+from Level.City.city import City
 from Level.Player.player import Player
 from Level.Disease.disease import Disease
 
