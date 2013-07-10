@@ -6,9 +6,9 @@ def BuildCity(name="Blah", disease=Disease()):
     """ Build a city """
     return City(name, disease)
     
-def BuildCityInfectionDelegate(name="Blah", disease=Disease()):
+def BuildCityInfectionDelegate(city=BuildCity()):
     """ Build a city infection delegate """
-    return CityInfectionDelegate(BuildCity(name, disease))
+    return CityInfectionDelegate(city)
 
 def GetCityList():
     """ Returns a list of cities """
