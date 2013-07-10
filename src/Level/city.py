@@ -2,7 +2,7 @@ from Level.Disease.Outbreak.outbreak_manager import TheOutbreakManager
 
 class City:
     """ Represents a city in the level """
-    MAX_DISEASE_COUNT = 3
+    MAX_INFECTIONS_PER_DISEASE = 3
     
     def __init__(self, name, disease):
         """ Initialize the city """
@@ -17,14 +17,14 @@ class City:
         
     def infect(self, amount, disease=None):
         """ Infect the city with given amount """
-        if amount > self.MAX_DISEASE_COUNT:
-            amount = self.MAX_DISEASE_COUNT
+        if amount > self.MAX_INFECTIONS_PER_DISEASE:
+            amount = self.MAX_INFECTIONS_PER_DISEASE
 
         if disease is None:
             disease = self.disease
             
         if disease in self.diseaseCounts:
-            maxAmountThatCanBeAdded = self.MAX_DISEASE_COUNT - self.diseaseCounts[disease]
+            maxAmountThatCanBeAdded = self.MAX_INFECTIONS_PER_DISEASE - self.diseaseCounts[disease]
             if amount > maxAmountThatCanBeAdded:
                 amount = maxAmountThatCanBeAdded
                 TheOutbreakManager.startOutbreak(self, disease)
@@ -41,9 +41,9 @@ class City:
             disease = self.disease
 
         if disease.isCured():
-            amount = self.MAX_DISEASE_COUNT
-        elif amount > self.MAX_DISEASE_COUNT:
-            amount = self.MAX_DISEASE_COUNT
+            amount = self.MAX_INFECTIONS_PER_DISEASE
+        elif amount > self.MAX_INFECTIONS_PER_DISEASE:
+            amount = self.MAX_INFECTIONS_PER_DISEASE
 
         if disease in self.diseaseCounts:
             amountOfDisease = self.diseaseCounts[disease]
