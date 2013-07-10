@@ -1,6 +1,5 @@
 import unittest
 
-from Level.city import City
 from Level.Disease.disease import Disease
 from Level.Disease.Outbreak.outbreak import Outbreak
 
