@@ -7,7 +7,7 @@ class OutbreakManager:
     
     def __init__(self):
         """ Initialize the Breakout Manager """
-        self.outbreakCount = 0
+        self.concurrentOutbreakCount = 0
         self.citiesInCurrentOutbreak = set()
         
     def startOutbreak(self, city, disease):
@@ -15,12 +15,12 @@ class OutbreakManager:
         with self.outbreak(city, disease) as outbreak:
             outbreak.breakout()
         
-        if self.outbreakCount == 0:
+        if self.concurrentOutbreakCount == 0:
             self.citiesInCurrentOutbreak = set()
             
     @contextmanager
     def outbreak(self, city, disease):
         """ Perform asingle outbreak """
-        self.outbreakCount += 1
+        self.concurrentOutbreakCount += 1
         yield Outbreak(city, disease, self.citiesInCurrentOutbreak)
-        self.outbreakCount -= 1
+        self.concurrentOutbreakCount -= 1
