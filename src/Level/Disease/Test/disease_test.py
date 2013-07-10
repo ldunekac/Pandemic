@@ -266,10 +266,30 @@ suiteAddCubes = unittest.TestSuite(map(addCubes, testcasesAddCubes))
 
 ##########################################################
 
+class removeCubes(unittest.TestCase):
+    """ Test cases of removeCubes """
+    
+    def  setUp(self):
+        """ Build the Disease for the test """
+        self.disease = Disease()
+        
+    def cubesRemoved(self):
+        """ Test that cubes are properly removed """
+        amount = 3
+        self.disease.removeCubes(amount)
+        assert self.disease.cubeCount == self.disease.AMOUNT_OF_DISEASE-amount, "The disease should have cubes removed"
+
+# Collect all test cases in this class
+testcasesRemoveCubes = ["cubesRemoved"]
+suiteRemoveCubes = unittest.TestSuite(map(removeCubes, testcasesRemoveCubes))
+
+##########################################################
+
 # Collect all test cases in this file
 suites = [suiteDiseaseCounterDecrease, suiteDiseaseCounterIncrease,
           suiteCheckIfEradicated,
-          suiteAddCubes]
+          suiteAddCubes,
+          suiteRemoveCubes]
 suite = unittest.TestSuite(suites)
 
 if __name__ == "__main__":
