@@ -26,53 +26,6 @@ suiteAddAdjacentCity = unittest.TestSuite(map(addAdjacentCity, testcasesAddAdjac
 
 ##########################################################
 
-class infect(unittest.TestCase):
-    """ Test cases of infect """
-    
-    def  setUp(self):
-        """ Build the *** for the test """
-        self.disease = Disease()
-        self.city = City("Blah", self.disease)
-        self.cities = GetCityList()
-        
-        TheOutbreakManager.reset()
-        
-    def infectCountIncreased(self):
-        """ Test that a city's disease count increases by the specified amount """
-        amount = 2
-        self.city.diseaseCounts[self.disease] = 0
-        self.city.infect(amount)
-        
-        assert self.city.diseaseCounts[self.disease] == amount, "City infection should increase by the amount given"
-        
-    def outbreak(self):
-        """ Test that a city can start an outbreak """
-        assert TheOutbreakManager.totalOutbreaks == 0, "Should have no outbreaks at start"
-        amount = 1
-        self.cities[0].diseaseCounts[self.cities[0].disease] = City.MAX_INFECTIONS_PER_DISEASE
-        self.cities[0].infect(amount)
-        
-        assert TheOutbreakManager.totalOutbreaks == 1, "Should have had a single outbreak"
-        
-    def cascadingOutbreak(self):
-        """ Test that a city can cascade an outbreak """
-        assert TheOutbreakManager.totalOutbreaks == 0, "Should have no outbreaks at start"
-        
-        amount = 1
-        self.cities[0].diseaseCounts[self.cities[0].disease] = City.MAX_INFECTIONS_PER_DISEASE
-        for city in self.cities[0].adjacentCities:
-            city.diseaseCounts[self.cities[0].disease] = City.MAX_INFECTIONS_PER_DISEASE
-            break
-        self.cities[0].infect(amount)
-        
-        assert TheOutbreakManager.totalOutbreaks == 2, "Should have had 2 outbreak"
-
-# Collect all test cases in this class
-testcasesInfect = ["infectCountIncreased", "outbreak", "cascadingOutbreak"]
-suiteInfect = unittest.TestSuite(map(infect, testcasesInfect))
-
-##########################################################
-
 class treat(unittest.TestCase):
     """ Test cases of infect """
     
@@ -101,7 +54,7 @@ suiteTreat = unittest.TestSuite(map(treat, testcasesTreat))
 
 
 # Collect all test cases in this file
-suites = [suiteAddAdjacentCity, suiteInfect, suiteTreat]
+suites = [suiteAddAdjacentCity, suiteTreat]
 suite = unittest.TestSuite(suites)
 
 if __name__ == "__main__":
