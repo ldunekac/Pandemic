@@ -45,7 +45,7 @@ suiteInfect = unittest.TestSuite(map(infect, testcasesInfect))
 
 ##########################################################
 
-class Treat(unittest.TestCase):
+class treat(unittest.TestCase):
     """ Test cases of infect """
     
     def  setUp(self):
@@ -67,7 +67,7 @@ class Treat(unittest.TestCase):
 
 # Collect all test cases in this class
 testcasesTreat = ["infectCountDecrease"]
-suiteTreat = unittest.TestSuite(map(Treat, testcasesTreat))
+suiteTreat = unittest.TestSuite(map(treat, testcasesTreat))
 
 ##########################################################
 

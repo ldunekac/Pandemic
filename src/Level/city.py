@@ -1,6 +1,7 @@
 
 class City:
     """ Represents a city in the level """
+    MAX_DISEASE_COUNT = 3
     
     def __init__(self, name, disease):
         """ Initialize the city """
@@ -15,14 +16,14 @@ class City:
         
     def infect(self, amount, disease=None):
         """ Infect the city with given amount """
-        if amount > 3:
-            amount = 3
+        if amount > self.MAX_DISEASE_COUNT:
+            amount = self.MAX_DISEASE_COUNT
 
         if disease is None:
             disease = self.disease
             
         if disease in self.diseaseCounts:
-            maxAmountThatCanBeAdded = 3 - self.diseaseCounts[disease]
+            maxAmountThatCanBeAdded = self.MAX_DISEASE_COUNT - self.diseaseCounts[disease]
             if amount > maxAmountThatCanBeAdded:
                 amount = maxAmountThatCanBeAdded
             self.diseaseCounts[disease] += amount
@@ -38,9 +39,9 @@ class City:
             disease = self.disease
 
         if disease.isCured():
-            amount = 3
-        elif amount > 3:
-            amount = 3
+            amount = self.MAX_DISEASE_COUNT
+        elif amount > self.MAX_DISEASE_COUNT:
+            amount = self.MAX_DISEASE_COUNT
 
         if disease in self.diseaseCounts:
             amountOfDisease = self.diseaseCounts[disease]
