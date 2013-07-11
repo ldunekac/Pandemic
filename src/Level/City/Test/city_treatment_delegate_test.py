@@ -1,5 +1,6 @@
 import unittest
 
+from Level.level_settings import TheLevelSettings
 from Level.Disease.disease import Disease
 
 from Test.test_helper import BuildCityTreatmentDelegate
@@ -51,7 +52,7 @@ class normalizeTreatmentAccount(unittest.TestCase):
         """ Build the Treatment Delegate for the test """
         self.disease = Disease()
         self.treatmentDelegate = BuildCityTreatmentDelegate()
-        self.treatmentDelegate.city.diseaseCounts[self.disease] = self.treatmentDelegate.MAX_INFECTIONS_PER_DISEASE
+        self.treatmentDelegate.city.diseaseCounts[self.disease] = TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY
         
     def basic(self):
         """ Test that the basic case works """
@@ -64,7 +65,7 @@ class normalizeTreatmentAccount(unittest.TestCase):
         self.disease.cure()
         treatAmount = 1
         amount = self.treatmentDelegate.normalizeTreatmentAmount(treatAmount, self.disease)
-        assert amount == self.treatmentDelegate.MAX_INFECTIONS_PER_DISEASE, "Normalized Amount should be the Max Infections a City can have"
+        assert amount == TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY, "Normalized Amount should be the Max Infections a City can have"
         
     def lessInfectionsThanTreatmentAmount(self):
         """ Test that the proper amount is returned when there are less infections than can be cured """

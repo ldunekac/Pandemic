@@ -1,7 +1,7 @@
+from Level.level_settings import TheLevelSettings
 
 class CityTreatmentDelegate:
     """ Delegate to handle treatment of disease infections in a city """
-    MAX_INFECTIONS_PER_DISEASE = 3
     
     def __init__(self, city):
         """ Initialize the City Treatment Delegate """
@@ -22,9 +22,9 @@ class CityTreatmentDelegate:
     def normalizeTreatmentAmount(self, amount, disease):
         """ Returns the normalized Treatment Amount """
         if disease.isCured():
-            amount = self.MAX_INFECTIONS_PER_DISEASE
-        elif amount > self.MAX_INFECTIONS_PER_DISEASE:
-            amount = self.MAX_INFECTIONS_PER_DISEASE
+            amount = TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY
+        elif amount > TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY:
+            amount = TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY
             
         if amount > self.city.getDiseaseInfections(disease):
             amount = self.city.getDiseaseInfections(disease)
