@@ -1,5 +1,6 @@
 import unittest
 
+from Level.level_settings import TheLevelSettings
 from Level.City.city import City
 from Level.City.city_infection_delegate import CityInfectionDelegate
 from Level.Disease.disease import Disease
@@ -20,7 +21,7 @@ class infect(unittest.TestCase):
         """ Test that a city can start an outbreak """
         assert TheOutbreakManager.totalOutbreaks == 0, "Should have no outbreaks at start"
         amount = 1
-        self.cities[0].diseaseCounts[self.cities[0].disease] = CityInfectionDelegate.MAX_INFECTIONS_PER_DISEASE
+        self.cities[0].diseaseCounts[self.cities[0].disease] = TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY
         self.cities[0].infect(amount)
         
         assert TheOutbreakManager.totalOutbreaks == 1, "Should have had a single outbreak"
@@ -30,9 +31,9 @@ class infect(unittest.TestCase):
         assert TheOutbreakManager.totalOutbreaks == 0, "Should have no outbreaks at start"
         
         amount = 1
-        self.cities[0].diseaseCounts[self.cities[0].disease] = CityInfectionDelegate.MAX_INFECTIONS_PER_DISEASE
+        self.cities[0].diseaseCounts[self.cities[0].disease] = TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY
         for city in self.cities[0].adjacentCities:
-            city.diseaseCounts[self.cities[0].disease] = CityInfectionDelegate.MAX_INFECTIONS_PER_DISEASE
+            city.diseaseCounts[self.cities[0].disease] = TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY
             break
         self.cities[0].infect(amount)
         
@@ -55,13 +56,13 @@ class shouldOutbreak(unittest.TestCase):
         """ Test that no outbreak should happen """
         disease = Disease()
         assert disease not in self.infectionDelegate.city.diseaseCounts, "City should not have the given disease"
-        assert not self.infectionDelegate.shouldOutbreak(CityInfectionDelegate.MAX_INFECTIONS_PER_DISEASE, disease), "Should not outbreak when infected by less than or equal to the max infections"
+        assert not self.infectionDelegate.shouldOutbreak(TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY, disease), "Should not outbreak when infected by less than or equal to the max infections"
 
     def shouldOutbreak(self):
         """ Test that an outbreak can happen properly """
         disease = Disease()
         self.infectionDelegate.city.diseaseCounts[disease] = 1
-        assert self.infectionDelegate.shouldOutbreak(CityInfectionDelegate.MAX_INFECTIONS_PER_DISEASE, disease), "Should outbreak when the disease count goes above the max infections"
+        assert self.infectionDelegate.shouldOutbreak(TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY, disease), "Should outbreak when the disease count goes above the max infections"
         
 # Collect all test cases in this class
 testcasesShouldOutbreak = ["noOutbreak", "shouldOutbreak"]

@@ -1,8 +1,8 @@
 from Level.Disease.Outbreak.outbreak_manager import TheOutbreakManager
+from Level.level_settings import TheLevelSettings
 
 class CityInfectionDelegate:
     """ Delegate to handle infecting a city """
-    MAX_INFECTIONS_PER_DISEASE = 3
     
     def __init__(self, city):
         """ Initialize the Infection Delegate """
@@ -15,14 +15,14 @@ class CityInfectionDelegate:
             
         if disease in self.city.diseaseCounts:
             if self.shouldOutbreak(amount, disease):
-                amount = self.MAX_INFECTIONS_PER_DISEASE - self.city.diseaseCounts[disease]
+                amount = TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY - self.city.diseaseCounts[disease]
                 TheOutbreakManager.startOutbreak(self.city, disease)
         self.increaseInfections(amount, disease)
         
     def normalizeAmount(self, amount):
         """ Normalize the amount of infection """
-        if amount > self.MAX_INFECTIONS_PER_DISEASE:
-            amount = self.MAX_INFECTIONS_PER_DISEASE
+        if amount > TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY:
+            amount = TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY
         return amount
         
     def getDiseaseToInfectWith(self, disease):
@@ -33,7 +33,7 @@ class CityInfectionDelegate:
         
     def shouldOutbreak(self, amount, disease):
         """ Return if the infection should cause an outbreak """
-        return self.city.getDiseaseInfections(disease) + amount > self.MAX_INFECTIONS_PER_DISEASE
+        return self.city.getDiseaseInfections(disease) + amount > TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY
         
     def increaseInfections(self, amount, disease):
         """ Increase number of infections """
