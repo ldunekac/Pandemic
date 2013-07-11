@@ -1,6 +1,7 @@
 
 class CityTreatmentDelegate:
     """ Delegate to handle treatment of disease infections in a city """
+    MAX_INFECTIONS_PER_DISEASE = 3
     
     def __init__(self, city):
         """ Initialize the City Treatment Delegate """

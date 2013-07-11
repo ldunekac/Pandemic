@@ -44,8 +44,45 @@ suiteTreatInfections = unittest.TestSuite(map(treatInfections, testcasesTreatInf
 
 ##########################################################
 
+class normalizeTreatmentAccount(unittest.TestCase):
+    """ Test cases of normalizeTreatmentAccount """
+    
+    def  setUp(self):
+        """ Build the Treatment Delegate for the test """
+        self.disease = Disease()
+        self.treatmentDelegate = BuildCityTreatmentDelegate()
+        self.treatmentDelegate.city.diseaseCounts[self.disease] = self.treatmentDelegate.MAX_INFECTIONS_PER_DISEASE
+        
+    def basic(self):
+        """ Test that the basic case works """
+        treatAmount = 1
+        amount = self.treatmentDelegate.normalizeTreatmentAmount(treatAmount, self.disease)
+        assert amount == treatAmount, "Normalized Amount should be the original amount"
+        
+    def cured(self):
+        """ Test that a cured disease can cure all the infections in a city """
+        self.disease.cure()
+        treatAmount = 1
+        amount = self.treatmentDelegate.normalizeTreatmentAmount(treatAmount, self.disease)
+        assert amount == self.treatmentDelegate.MAX_INFECTIONS_PER_DISEASE, "Normalized Amount should be the Max Infections a City can have"
+        
+    def lessInfectionsThanTreatmentAmount(self):
+        """ Test that the proper amount is returned when there are less infections than can be cured """
+        infections = 1
+        self.treatmentDelegate.city.diseaseCounts[self.disease] = infections
+        treatAmount = 2
+        amount = self.treatmentDelegate.normalizeTreatmentAmount(treatAmount, self.disease)
+        assert amount == infections, "Normalized Amount should be the number of infections of that disease if there are less infections than can be treated"
+
+# Collect all test cases in this class
+testcasesNormalizeTreatmentAccount = ["basic", "cured", "lessInfectionsThanTreatmentAmount"]
+suiteNormalizeTreatmentAccount = unittest.TestSuite(map(normalizeTreatmentAccount, testcasesNormalizeTreatmentAccount))
+
+##########################################################
+
 # Collect all test cases in this file
-suites = [suiteTreatInfections]
+suites = [suiteTreatInfections,
+          suiteNormalizeTreatmentAccount]
 suite = unittest.TestSuite(suites)
 
 if __name__ == "__main__":
