@@ -1,10 +1,10 @@
+from Level.level_settings import TheLevelSettings
 
 class Disease:
-    """ Represents a disease in a level of the game """    
-    AMOUNT_OF_DISEASE = 24
-
+    """ Represents a disease in a level of the game """
+    
     def __init__(self):
-        self.cubeCount = self.AMOUNT_OF_DISEASE
+        self.cubeCount = TheLevelSettings.MAX_INFECTIONS_PER_DISEASE
         self.cured = False
         self.eradicated = False
 
@@ -14,8 +14,8 @@ class Disease:
             self.cubeCount = 0
 
     def addCubes(self, amount):
-        if amount > 3:
-            amount = 3
+        if amount > TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY:
+            amount = TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY
 
         self.cubeCount += amount
         self.checkIfEradicated()
@@ -32,5 +32,5 @@ class Disease:
 
     def checkIfEradicated(self):
         """ Check if the disease has been eradicated """
-        if self.cured and self.cubeCount == self.AMOUNT_OF_DISEASE:
+        if self.cured and self.cubeCount == TheLevelSettings.MAX_INFECTIONS_PER_DISEASE:
             self.eradicated = True 

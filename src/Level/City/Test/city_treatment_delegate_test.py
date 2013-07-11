@@ -29,7 +29,7 @@ class treatInfections(unittest.TestCase):
         disease.removeCubes(2)
         
         self.treatmentDelegate.treatInfections(amount, disease)
-        assert disease.cubeCount == disease.AMOUNT_OF_DISEASE, "Should have completely returned all disease cubes"
+        assert disease.cubeCount == TheLevelSettings.MAX_INFECTIONS_PER_DISEASE, "Should have completely returned all disease cubes"
         
     def treatDiseaseWithNoInfections(self):
         """ Test that treating a diseas not in the city works properly """

@@ -1,5 +1,6 @@
 import unittest
 
+from Level.level_settings import TheLevelSettings
 from Level.City.city import City
 from Level.Disease.disease import Disease
 
@@ -276,7 +277,7 @@ class removeCubes(unittest.TestCase):
         """ Test that cubes are properly removed """
         amount = 3
         self.disease.removeCubes(amount)
-        assert self.disease.cubeCount == self.disease.AMOUNT_OF_DISEASE-amount, "The disease should have cubes removed"
+        assert self.disease.cubeCount == TheLevelSettings.MAX_INFECTIONS_PER_DISEASE-amount, "The disease should have cubes removed"
 
 # Collect all test cases in this class
 testcasesRemoveCubes = ["cubesRemoved"]
