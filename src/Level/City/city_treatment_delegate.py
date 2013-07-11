@@ -26,8 +26,8 @@ class CityTreatmentDelegate:
         elif amount > self.MAX_INFECTIONS_PER_DISEASE:
             amount = self.MAX_INFECTIONS_PER_DISEASE
             
-        if amount > self.city.diseaseCounts[disease]:
-            amount = self.city.diseaseCounts[disease]
+        if amount > self.city.getDiseaseInfections(disease):
+            amount = self.city.getDiseaseInfections(disease)
             
         return amount
         

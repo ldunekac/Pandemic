@@ -20,7 +20,7 @@ class infect(unittest.TestCase):
         """ Test that a city can start an outbreak """
         assert TheOutbreakManager.totalOutbreaks == 0, "Should have no outbreaks at start"
         amount = 1
-        self.cities[0].diseaseCounts[self.cities[0].disease] = City.MAX_INFECTIONS_PER_DISEASE
+        self.cities[0].diseaseCounts[self.cities[0].disease] = CityInfectionDelegate.MAX_INFECTIONS_PER_DISEASE
         self.cities[0].infect(amount)
         
         assert TheOutbreakManager.totalOutbreaks == 1, "Should have had a single outbreak"
@@ -30,9 +30,9 @@ class infect(unittest.TestCase):
         assert TheOutbreakManager.totalOutbreaks == 0, "Should have no outbreaks at start"
         
         amount = 1
-        self.cities[0].diseaseCounts[self.cities[0].disease] = City.MAX_INFECTIONS_PER_DISEASE
+        self.cities[0].diseaseCounts[self.cities[0].disease] = CityInfectionDelegate.MAX_INFECTIONS_PER_DISEASE
         for city in self.cities[0].adjacentCities:
-            city.diseaseCounts[self.cities[0].disease] = City.MAX_INFECTIONS_PER_DISEASE
+            city.diseaseCounts[self.cities[0].disease] = CityInfectionDelegate.MAX_INFECTIONS_PER_DISEASE
             break
         self.cities[0].infect(amount)
         

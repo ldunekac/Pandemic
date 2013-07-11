@@ -73,9 +73,16 @@ class normalizeTreatmentAccount(unittest.TestCase):
         treatAmount = 2
         amount = self.treatmentDelegate.normalizeTreatmentAmount(treatAmount, self.disease)
         assert amount == infections, "Normalized Amount should be the number of infections of that disease if there are less infections than can be treated"
+        
+    def treatNewDisease(self):
+        """ Test that the proper amount is returned when there are less infections than can be cured """
+        disease = Disease()
+        treatAmount = 2
+        amount = self.treatmentDelegate.normalizeTreatmentAmount(treatAmount, disease)
+        assert amount == 0, "If the disease is not in the city nothing should be treateds"
 
 # Collect all test cases in this class
-testcasesNormalizeTreatmentAccount = ["basic", "cured", "lessInfectionsThanTreatmentAmount"]
+testcasesNormalizeTreatmentAccount = ["basic", "cured", "lessInfectionsThanTreatmentAmount", "treatNewDisease"]
 suiteNormalizeTreatmentAccount = unittest.TestSuite(map(normalizeTreatmentAccount, testcasesNormalizeTreatmentAccount))
 
 ##########################################################
