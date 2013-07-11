@@ -3,14 +3,14 @@ import unittest
 from Level.Disease.disease import Disease
 from Level.Disease.Outbreak.outbreak import Outbreak
 
-from Test.test_helper import GetCityList
+from Test.test_helper import BuildCityList
 
 class breakout(unittest.TestCase):
     """ Test cases of breakout """
     
     def  setUp(self):
         """ Build the Cities and Outbreak for the test """
-        self.cities = GetCityList()
+        self.cities = BuildCityList()
         self.disease = self.cities[0].disease
         
         self.citiesHitByOutbreak = set()

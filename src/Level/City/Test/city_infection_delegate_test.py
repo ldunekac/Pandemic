@@ -6,14 +6,14 @@ from Level.City.city_infection_delegate import CityInfectionDelegate
 from Level.Disease.disease import Disease
 from Level.Disease.Outbreak.outbreak_manager import TheOutbreakManager
 
-from Test.test_helper import BuildCityInfectionDelegate, GetCityList
+from Test.test_helper import BuildCityInfectionDelegate, BuildCityList
 
 class infect(unittest.TestCase):
     """ Test cases of infect """
     
     def  setUp(self):
         """ Build the Infection Delegate for the test """
-        self.cities = GetCityList()
+        self.cities = BuildCityList()
         self.infectionDelegate = BuildCityInfectionDelegate(self.cities[0])
         TheOutbreakManager.reset()
         

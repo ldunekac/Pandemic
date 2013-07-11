@@ -15,7 +15,7 @@ def BuildCityTreatmentDelegate(city=BuildCity()):
     """ Build a city treatment delegate """
     return CityTreatmentDelegate(city)
 
-def GetCityList():
+def BuildCityList():
     """ Returns a list of cities """
     disease = Disease()
         

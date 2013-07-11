@@ -2,7 +2,7 @@ from Level.City.city import City
 from Level.Disease.disease import Disease
 from Level.Disease.Outbreak.outbreak_manager import TheOutbreakManager
 
-from Test.test_helper import GetCityList
+from Test.test_helper import BuildCityList
 
 import unittest
 
