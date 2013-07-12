@@ -2,7 +2,7 @@ import unittest
 
 from Level.Disease.Outbreak.outbreak_manager import OutbreakManager
 
-from Test.test_helper import GetCityList
+from Test.test_helper import BuildCityList
 
 class outbreak(unittest.TestCase):
     """ Test cases of outbreak """
@@ -53,7 +53,7 @@ class startOutbreak(unittest.TestCase):
     def  setUp(self):
         """ Build the Outbreak Manager and Cities for the test """
         self.outbreakManager = OutbreakManager()
-        self.cities = GetCityList()
+        self.cities = BuildCityList()
         
     def singleOutbreak_ConcurrentOutbreakCount(self):
         """ Test that a single outbreak has the concurrentOutbreakCount set properly"""

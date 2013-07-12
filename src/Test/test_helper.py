@@ -1,5 +1,6 @@
 from Level.City.city import City
 from Level.City.city_infection_delegate import CityInfectionDelegate
+from Level.City.city_treatment_delegate import CityTreatmentDelegate
 from Level.Disease.disease import Disease
 
 def BuildCity(name="Blah", disease=Disease()):
@@ -9,8 +10,12 @@ def BuildCity(name="Blah", disease=Disease()):
 def BuildCityInfectionDelegate(city=BuildCity()):
     """ Build a city infection delegate """
     return CityInfectionDelegate(city)
+    
+def BuildCityTreatmentDelegate(city=BuildCity()):
+    """ Build a city treatment delegate """
+    return CityTreatmentDelegate(city)
 
-def GetCityList():
+def BuildCityList():
     """ Returns a list of cities """
     disease = Disease()
         

@@ -1,9 +1,8 @@
 from Level.City.city_infection_delegate import CityInfectionDelegate
-from Level.Disease.Outbreak.outbreak_manager import TheOutbreakManager
+from Level.City.city_treatment_delegate import CityTreatmentDelegate
 
 class City:
     """ Represents a city in the level """
-    MAX_INFECTIONS_PER_DISEASE = 3
     
     def __init__(self, name, disease):
         """ Initialize the city """
@@ -13,6 +12,7 @@ class City:
         self.diseaseCounts = {}
         
         self.infectionDelegate = CityInfectionDelegate(self)
+        self.treatmentDelegate = CityTreatmentDelegate(self)
         
     def addAdjacentCity(self, city):
         """ Add a city to this city's adjacency list """
@@ -24,22 +24,7 @@ class City:
 
     def treat(self, amount, disease = None):
         """ Cures a city of a disease by a given amount"""
-        if disease is None:
-            disease = self.disease
-
-        if disease.isCured():
-            amount = self.MAX_INFECTIONS_PER_DISEASE
-        elif amount > self.MAX_INFECTIONS_PER_DISEASE:
-            amount = self.MAX_INFECTIONS_PER_DISEASE
-
-        if disease in self.diseaseCounts:
-            amountOfDisease = self.diseaseCounts[disease]
-            if(amount >= amountOfDisease):
-                disease.addCubes(self.diseaseCounts[disease])
-                self.diseaseCounts[disease] = 0
-            else:
-                self.diseaseCounts[disease] -= amount
-                disease.addCubes(amount)
+        self.treatmentDelegate.treat(amount, disease)
         
     def getDiseaseInfections(self, disease):
         """ Return the number of infections in the city of for the given disease """
