@@ -2,6 +2,7 @@ from Level.City.city import City
 from Level.City.city_infection_delegate import CityInfectionDelegate
 from Level.City.city_treatment_delegate import CityTreatmentDelegate
 from Level.Disease.disease import Disease
+from Level.Deck.infection_deck import InfectionDeck 
 
 def BuildCity(name="Blah", disease=Disease()):
     """ Build a city """
@@ -26,3 +27,8 @@ def BuildCityList():
     city1.addAdjacentCity(city3)
     
     return [city1, city2, city3]
+
+def BuildInfectionDeck():
+    """ Returns a Infection Deck """
+    cityList = BuildCityList()
+    return InfectionDeck(cityList)

@@ -3,8 +3,8 @@ import random
 
 class InfectionDeck(Deck):
 
-    def __init__(self, deck):
-        Deck.__init__(self, deck)
+    def __init__(self, cities):
+        Deck.__init__(self, cities)
 
     def draw(self):
         if len(self.deck) == 0:

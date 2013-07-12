@@ -1,5 +1,5 @@
-from card import card
-from Level.City.city_infection_delegate import CityInfectionDelegate.MAX_INFECTIONS_PER_DISEASE as maxDiseaseCount
+from card import Card
+from Level.level_settings import TheLevelSettings
 
 """
 Draw bottom card
@@ -14,8 +14,8 @@ The infection deck
 class EpidemicCard(Card):
     TYPE = "EPIDEMIC"
 
-    def __init__(self):
-        Card.__init__(self, infectionDeck, infectionRateManager)
+    def __init__(self, infectionDeck, infectionRateManager ):
+        Card.__init__(self)
         self.infectionDeck = infectionDeck
         self.infectionRateManager = infectionRateManager
 
@@ -36,10 +36,10 @@ class EpidemicCard(Card):
     def infect(self):
         """ Draws the bottom card from the infection deck
         and infects that city with the max amount of infections """
-        city = self.infectionRateManager.drawBottom()
-        city.infect(maxDiseaseCount)
+        city = self.infectionDeck.drawBottom()
+        city.infect(TheLevelSettings.MAX_INFECTIONS_PER_DISEASE_IN_CITY)
 
     def intensify(self):
         self.infectionDeck.intensify()
-        self.infectionRateManager.increaseInfectionRate()
+
 
