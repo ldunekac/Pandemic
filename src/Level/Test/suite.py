@@ -1,5 +1,6 @@
 import unittest
 
+from Level.Test.research_station_manager_test import suite as research_station_manager_suite
 from Level.Test.infection_rate_test import suite as infection_rate_suite
 from level_test import suite as level_test_suite
 
@@ -13,5 +14,6 @@ suites = [deck_suite,
           player_suite,
           diease_suite,
           city_suite,
-          infection_rate_suite]
+          infection_rate_suite,
+          research_station_manager_suite]
 suite = unittest.TestSuite(suites)
