@@ -5,6 +5,7 @@ class MenuEntry:
     def __init__(self, label, callBackFuction):
         self.label = label
         self.callBackFuction = callBackFuction
+        self.selected = False
 
     def getLabel(self):
         return self.label
@@ -14,3 +15,9 @@ class MenuEntry:
 
     def run(self):
         self.callBackFuction()
+
+    def setSelected(self, selected):
+        self.selected = selected
+
+    def isSelected(self):
+        return self.selected

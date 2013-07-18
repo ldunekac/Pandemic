@@ -12,11 +12,15 @@ class Menu:
 
     def moveUp(self):
         if self.selectedItem > 0:
+            self.menuItemList[self.selectedItem].setSelected(False)
             self.selectedItem -= 1
+            self.menuItemList[self.selectedItem].setSelected(True)
 
     def moveDown(self):
         if self.selectedItem < len(self.menuItemList) - 1:
+            self.menuItemList[self.selectedItem].setSelected(False)
             self.selectedItem += 1
+            self.menuItemList[self.selectedItem].setSelected(True)
 
     def getEntryText(self):
         textList = []
