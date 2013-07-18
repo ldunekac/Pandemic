@@ -4,6 +4,7 @@ from pygame.locals import *
 
 from Menu.menu import Menu
 from View.GUI.window import window
+from View.GUI.Menu.menu_entry_view import MenuEntryView
 
 class MenuView:
 
@@ -12,16 +13,19 @@ class MenuView:
         self.position = position
         self.windowSize = window.getWindowSize()
         self.font = pygame.font.SysFont(None, 48)
+        self.menuEntryViewList = []
+        for menuItem in self.menu.getEntries():
+            menuEntryView = MenuEntryView(menuItem)
+            self.menuEntryViewList.append(menuEntryView)
+
+
 
     def draw(self):
         newPosition = self.position
         surface = pygame.Surface(self.windowSize, flags = pygame.SRCALPHA)
-        for menuItem in self.menu.getEntryText():
-            text = self.font.render(menuItem,1, (10,10,10))
-            surface.blit(text,newPosition)
-            textRect = text.get_rect()
-            textSize = (textRect.width, textRect.height)
-            newPosition = (self.position[0], self.position[1] + textSize[1])
+        for menuItem in self.menuEntryViewList:
+            surface.blit(menuItem.draw(),newPosition)
+            newPosition = (newPosition[0], newPosition[1] + menuItem.getFontSize())
         return surface
 
 

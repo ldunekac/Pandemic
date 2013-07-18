@@ -7,7 +7,7 @@ class MenuEntry:
         self.callBackFuction = callBackFuction
         self.selected = False
 
-    def getLabel(self):
+    def getText(self):
         return self.label
 
     def getCallBackFunction(self):

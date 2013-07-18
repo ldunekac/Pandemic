@@ -5,10 +5,13 @@ class Menu:
 
     def __init__(self):
         self.menuItemList = []
-        self.selectedItem = 0
+        self.selectedItem = None
 
     def addMenuEntry(self, menuEntry):
         self.menuItemList.append(menuEntry)
+        if self.selectedItem == None:
+            self.selectedItem = 0
+            self.menuItemList[0].setSelected(True)
 
     def moveUp(self):
         if self.selectedItem > 0:
@@ -22,11 +25,8 @@ class Menu:
             self.selectedItem += 1
             self.menuItemList[self.selectedItem].setSelected(True)
 
-    def getEntryText(self):
-        textList = []
-        for entry in self.menuItemList:
-            textList.append(entry.getLabel())
-        return textList
+    def getEntries(self):
+        return self.menuItemList
 
     def executeEntry(self):
         self.menuItemList[self.selectedItem].run()

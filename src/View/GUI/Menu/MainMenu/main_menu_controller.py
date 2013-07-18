@@ -31,6 +31,12 @@ class MainMenuController:
                 if event.type == KEYDOWN:
                     if event.key == K_q:
                         self.running = False
+                    if event.key == K_UP:
+                        self.menu.moveUp()
+                    if event.key == K_DOWN:
+                        self.menu.moveDown()
+                    if event.key == K_RETURN:
+                        self.menu.executeEntry()
             window.draw(self.mainMenuView.draw())
 
 
@@ -39,4 +45,4 @@ class MainMenuController:
 
     def exit(self):
         """ Exits the Game """
-        eixt(0)
+        exit(0)
