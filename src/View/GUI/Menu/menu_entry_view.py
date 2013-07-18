@@ -15,7 +15,6 @@ class MenuEntryView:
     def draw(self):
         surface = pygame.Surface(self.windowSize, flags = pygame.SRCALPHA)
         transformedImage = pygame.transform.scale(self.selectedPicture,(self.fontSize,self.fontSize))
-        
 
         if self.menuEntryItem.isSelected():
             surface.blit(transformedImage,(0,0))
