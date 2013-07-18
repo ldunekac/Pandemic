@@ -8,11 +8,12 @@ import pygame
 from pygame.locals import *
 from Menu.menu import Menu
 from Menu.menu_entry import MenuEntry
+from View.GUI.window import Window
 
 class MainMenuController:
 
     def __init__(self):
-        pygame.init()
+        self.window = Window()
         self.menu = Menu()
         self.menu.addMenuEntry(MenuEntry("Play!!", self.playGame))
         self.menu.addMenuEntry(MenuEntry("Exit", self.exit))
