@@ -18,5 +18,11 @@ class Menu:
         if self.selectedItem < len(self.menuItemList) - 1:
             self.selectedItem += 1
 
+    def getEntryText(self):
+        textList = []
+        for entry in self.menuItemList:
+            textList.append(entry.getLabel())
+        return textList
+
     def executeEntry(self):
         self.menuItemList[self.selectedItem].run()

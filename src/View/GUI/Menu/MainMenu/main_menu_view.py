@@ -1,27 +1,20 @@
 import pygame
 from pygame.locals import *
-
+from View.GUI.window import window
+from View.GUI.Menu.menu_view import MenuView
 
 class MainMenuView:
 
-    def __init__(self, mainMenuControler):
-        pygame.init()
-        imagePath = '../../Pictures/MainMenuPictures/pandemic_menu_picture.jpg'
-        self.screenSize = (500,500)
-        self.menuPicture = pygame.image.load(imagePath)
-        menuPictureSize = self.menuPicture.get_size()
-        self.screen = pygame.display.set_mode(menuPictureSize)
-        self.menuPicture = self.menuPicture.convert()
-        
-    def display(self):
-        """ Displays the Start Menu """
-        self.screen.blit(self.menuPicture,(0,0))
-        pygame.display.flip()
+    def __init__(self, menu):
+        imagePath = 'View/GUI/Pictures/MainMenuPictures/pandemic_logo.png'
+        self.windowSize = window.getWindowSize()
+        self.factor = (.1,.1)
+        self.menuPicture = pygame.image.load(imagePath).convert()
+        self.menuPosition = tuple([a*b for a,b in zip(self.windowSize,self.factor)])
+        self.menuView = MenuView(menu, self.menuPosition)
 
-
-view = MainMenuView(4)
-view.display()
-
-
-for i in range(1,50000):
-    view.display()
+    def draw(self):
+        surface = pygame.Surface(self.windowSize)
+        surface.blit(pygame.transform.scale(self.menuPicture, self.windowSize),(0,0))
+        surface.blit(self.menuView.draw(),(0,0))
+        return surface
