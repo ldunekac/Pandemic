@@ -36,7 +36,13 @@ class MainMenuController:
                         self.menu.moveDown()
                     if event.key == K_RETURN:
                         self.menu.executeEntry()
+            mousePosition = pygame.mouse.get_pos()
+            self.mainMenuView.selectEntry(mousePosition)  
             window.draw(self.mainMenuView.draw())
+            if pygame.mouse.get_pressed()[0]:
+                self.mainMenuView.executeIfSelected(mousePosition)
+
+              
 
 
     def playGame(self):

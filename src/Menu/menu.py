@@ -9,24 +9,33 @@ class Menu:
 
     def addMenuEntry(self, menuEntry):
         self.menuItemList.append(menuEntry)
-        if self.selectedItem == None:
-            self.selectedItem = 0
-            self.menuItemList[0].setSelected(True)
+        if len(self.menuItemList) > 1:
+            self.menuItemList[-2].addNext(self.menuItemList[-1])
+            self.menuItemList[-1].addBack(self.menuItemList[-2])
+        else:
+            self.menuItemList[0].select()
 
     def moveUp(self):
-        if self.selectedItem > 0:
-            self.menuItemList[self.selectedItem].setSelected(False)
-            self.selectedItem -= 1
-            self.menuItemList[self.selectedItem].setSelected(True)
+        for item in self.menuItemList:
+            if item.isSelected():
+                item = item.getBack()
+                if item != None:
+                    item.select()
+                break
 
     def moveDown(self):
-        if self.selectedItem < len(self.menuItemList) - 1:
-            self.menuItemList[self.selectedItem].setSelected(False)
-            self.selectedItem += 1
-            self.menuItemList[self.selectedItem].setSelected(True)
+        for item in self.menuItemList:
+            if item.isSelected():
+                item = item.getNext()
+                if item != None:
+                    item.select()
+                break
 
     def getEntries(self):
         return self.menuItemList
 
     def executeEntry(self):
-        self.menuItemList[self.selectedItem].run()
+        for item in self.menuItemList:
+            if item.isSelected():
+                item.run()
+                break

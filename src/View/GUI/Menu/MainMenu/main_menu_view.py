@@ -18,3 +18,9 @@ class MainMenuView:
         surface.blit(pygame.transform.scale(self.menuPicture, self.windowSize),(0,0))
         surface.blit(self.menuView.draw(),(0,0))
         return surface
+
+    def selectEntry(self, position):
+        self.menuView.selectEnty(position)
+
+    def executeIfSelected(self,position):
+        self.menuView.executeIfSelected(position)

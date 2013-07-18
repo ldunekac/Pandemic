@@ -5,24 +5,53 @@ from View.GUI.window import window
 
 class MenuEntryView:
 
-    def __init__(self, menuEntryItem, selectedPicture):
+    def __init__(self, menuEntryItem, selectedPicture, position):
+        self.position = position
         self.menuEntryItem = menuEntryItem
         self.selectedPicture = selectedPicture
         self.fontSize = 48
         self.font = pygame.font.SysFont(None, self.fontSize)
         self.windowSize = window.getWindowSize()
+        self.transformImage()
+        self.set_rect()
+        
 
     def draw(self):
-        surface = pygame.Surface(self.windowSize, flags = pygame.SRCALPHA)
-        transformedImage = pygame.transform.scale(self.selectedPicture,(self.fontSize,self.fontSize))
+        self.set_rend()
+        
+        surface = pygame.Surface((self.fontSize + self.rend.get_rect().width + 100,self.fontSize), flags = pygame.SRCALPHA)
+        
 
         if self.menuEntryItem.isSelected():
-            surface.blit(transformedImage,(0,0))
+            surface.blit(self.transformImage,(0,0))
         
-        text = self.font.render(self.menuEntryItem.getText(),1, (10,10,10))
-        textPosition = text.get_rect(left = self.fontSize,centery = transformedImage.get_rect().height/2)
-        surface.blit(text, textPosition)
+        surface.blit(self.rend, self.textPosition)
         return surface
-    
+
+    def set_rect(self):
+        self.set_rend()
+        self.rect = self.rend.get_rect()
+        self.textPosition = self.rend.get_rect(left = self.fontSize,centery = self.transformImage.get_rect().height/2)
+        self.rect.topleft = (self.position[0] + self.fontSize, self.position[1])
+        
+    def set_rend(self):
+        self.rend = self.font.render(self.menuEntryItem.getText(),1, (10,10,10))
+        
+    def transformImage(self):
+        self.transformImage = pygame.transform.scale(self.selectedPicture,(self.fontSize,self.fontSize))
+
     def getFontSize(self):
         return self.fontSize
+
+    def selectIfMouseEntered(self, mousePosition):
+        if self.rect.collidepoint(mousePosition):
+            self.menuEntryItem.select()
+
+    def executeIfSelected(self, mousePosition):
+        if self.rect.collidepoint(mousePosition):
+            self.menuEntryItem.run()
+
+
+
+
+
