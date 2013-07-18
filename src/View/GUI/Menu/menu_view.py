@@ -12,10 +12,11 @@ class MenuView:
         self.menu = menu
         self.position = position
         self.windowSize = window.getWindowSize()
+        selectedPicture = pygame.image.load('View/GUI/Pictures/MainMenuPictures/biohazard.png')
         self.font = pygame.font.SysFont(None, 48)
         self.menuEntryViewList = []
         for menuItem in self.menu.getEntries():
-            menuEntryView = MenuEntryView(menuItem)
+            menuEntryView = MenuEntryView(menuItem, selectedPicture)
             self.menuEntryViewList.append(menuEntryView)
 
 

@@ -20,7 +20,6 @@ class MainMenuController:
         self.menu.addMenuEntry(MenuEntry("Exit", self.exit))
         self.mainMenuView = MainMenuView(self.menu)
         self.clock = pygame.time.Clock()
-
         self.running = True
 
     def run(self):
@@ -41,7 +40,7 @@ class MainMenuController:
 
 
     def playGame(self):
-        """ Executes the main Game """
+        """ Executes the main Game !!!"""
 
     def exit(self):
         """ Exits the Game """
