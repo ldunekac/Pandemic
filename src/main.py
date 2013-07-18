@@ -14,7 +14,7 @@ def main(args):
         mainMenuController = MainMenuController()
         mainMenuController.run() 
 
-    except ImportError:
+    except ImportError as e:
         from View.Console.Level.level_controller import LevelController
         levelController = LevelController()
         levelController.run()

@@ -10,7 +10,7 @@ from Menu.menu import Menu
 from Menu.menu_entry import MenuEntry
 from View.GUI.window import window
 from View.GUI.Menu.MainMenu.main_menu_view import MainMenuView
-
+from View.GUI.Game.game_controller import GameController
 
 class MainMenuController:
 
@@ -47,6 +47,9 @@ class MainMenuController:
 
     def playGame(self):
         """ Executes the main Game !!!"""
+        gameController = GameController()
+        gameController.run()
+
 
     def exit(self):
         """ Exits the Game """
