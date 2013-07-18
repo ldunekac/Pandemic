@@ -32,10 +32,11 @@ class GameView:
         self.cardView = CardView()
         self.actionView = ActionView()
         self.windowSize = window.getWindowSize()
+        self.boardRatio = (1,1)
 
     def draw(self):
         surface = pygame.Surface(self.windowSize)
-        boardSurfaceSize = tuple([int(a*b) for a,b in zip((2.0/3,2.0/3), self.windowSize)])
+        boardSurfaceSize = tuple([int(a*b) for a,b in zip(self.boardRatio, self.windowSize)])
         boardSurface = pygame.transform.scale(self.boardView.draw(),boardSurfaceSize)
         return boardSurface
         
