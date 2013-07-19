@@ -19,6 +19,9 @@ class Level:
         self.players = []
 
         self.setup()
+
+    def getCities(self):
+        return self.cities
         
     def setup(self):
         """ Setup the level for the start of the game """
@@ -30,21 +33,21 @@ class Level:
         
     def setupCities(self):
         """ Setup the cities """
-        disease = Disease()
+        disease = Disease((0,0,0))
         self.diseases.append(disease)
         
-        sanFrancisco = City("San Francisco", disease)
-        chicago = City("Chicago", disease)
-        atlanta = City("Atlanta", disease)
-        montreal = City("Montreal", disease)
-        newYork = City("New York", disease)
-        washington = City("Washington", disease)
-        london = City("London", disease)
-        madrid = City("Madrid", disease)
-        essen = City("Essen", disease)
-        paris = City("Paris", disease)
-        stPetersburg = City("St. Petersburg", disease)
-        milan = City("Milan", disease)
+        sanFrancisco = City("San Francisco", disease,(235,330))
+        chicago = City("Chicago", disease, (350,280))
+        atlanta = City("Atlanta", disease,(385,340))
+        montreal = City("Montreal", disease,(440,275))
+        newYork = City("New York", disease, (480,300))
+        washington = City("Washington", disease, (440,340))
+        london = City("London", disease,(700,230))
+        madrid = City("Madrid", disease,(680,310))
+        essen = City("Essen", disease, (790,220))
+        paris = City("Paris", disease, (770,270))
+        stPetersburg = City("St. Petersburg", disease, (890,192))
+        milan = City("Milan", disease,(830,260))
         self.startingCity = atlanta
         
         self.cities.append(chicago)

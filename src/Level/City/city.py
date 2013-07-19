@@ -4,16 +4,29 @@ from Level.City.city_treatment_delegate import CityTreatmentDelegate
 class City:
     """ Represents a city in the level """
     
-    def __init__(self, name, disease):
+    def __init__(self, name, disease, mapLocation = None):
         """ Initialize the city """
         self.name = name
         self.disease = disease
         self.adjacentCities = set()
         self.diseaseCounts = {}
-        
+        self.mapLocation = mapLocation
+
         self.infectionDelegate = CityInfectionDelegate(self)
         self.treatmentDelegate = CityTreatmentDelegate(self)
+
+    def getName(self):
+        return self.name
         
+    def getDisease(self):
+        return self.disease
+
+    def getMapLocation(self):
+        return self.mapLocation
+
+    def getAdjacentCities(self):
+        return self.adjacentCities
+
     def addAdjacentCity(self, city):
         """ Add a city to this city's adjacency list """
         self.adjacentCities.add(city)
@@ -32,6 +45,9 @@ class City:
         if disease in self.diseaseCounts:
             amount = self.diseaseCounts[disease]
         return amount
+
+    def getRelativeLocation(self):
+        return self.mapLocation
         
     def __repr__(self):
         """ Return the string representtation of the City """

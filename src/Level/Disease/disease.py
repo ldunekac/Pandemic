@@ -3,10 +3,11 @@ from Level.level_settings import TheLevelSettings
 class Disease:
     """ Represents a disease in a level of the game """
     
-    def __init__(self):
+    def __init__(self, rgbColor = None):
         self.cubeCount = TheLevelSettings.MAX_INFECTIONS_PER_DISEASE
         self.cured = False
         self.eradicated = False
+        self.rgbColor = rgbColor
 
     def removeCubes(self, amount):
         self.cubeCount -= amount
@@ -29,6 +30,9 @@ class Disease:
 
     def isEradicated(self):
         return self.eradicated
+
+    def getColor(self):
+        return self.rgbColor
 
     def checkIfEradicated(self):
         """ Check if the disease has been eradicated """

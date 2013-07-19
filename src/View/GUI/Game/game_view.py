@@ -28,7 +28,7 @@ class GameView:
     def __init__(self, level):
         """ Initializes the game View"""
         self.level = level
-        self.boardView = BoardView()
+        self.boardView = BoardView(level.getCities())
         self.cardView = CardView()
         self.actionView = ActionView()
         self.windowSize = window.getWindowSize()
