@@ -33,10 +33,12 @@ class Level:
         
     def setupCities(self):
         """ Setup the cities """
-        disease = Disease((0,0,0))
+        
+        # Blue Dise
+        disease = Disease((0,0,225))
         self.diseases.append(disease)
         
-        sanFrancisco = City("San Francisco", disease,(235,330))
+        sanFrancisco = City("San Francisco", disease,(220,310))
         chicago = City("Chicago", disease, (350,280))
         atlanta = City("Atlanta", disease,(385,340))
         montreal = City("Montreal", disease,(440,275))
@@ -79,6 +81,190 @@ class Level:
         self.makeCitiesAdjacent(essen, stPetersburg)
         self.makeCitiesAdjacent(essen, milan)
         self.makeCitiesAdjacent(paris, milan)
+
+        #Yellow Cities
+        disease = Disease((255,255,0))
+        self.diseases.append(disease)
+
+        losAngeles  = City("Los Angeles", disease, (235,360))
+        miami       = City("Miami", disease,(410,390))
+        mexicoCity  = City("Mexico City", disease, (330,420))
+        bogota      = City("Bogota", disease, (435,490))
+        lima        = City("Lima", disease, (400, 570))
+        santiago    = City("Santiago", disease, (410,690))
+        buenosAires = City("Buenos Aires", disease, (510, 685))
+        saoPaulo    = City("Sao Paulo", disease, (570,610))
+        lagos       = City("Lagos", disease, (750,480))
+        khartoum    = City("Khartoum", disease, (880,460))
+        kinshasa    = City("Kinshasa", disease, (815, 540))
+        johannesburg =City("Johannesburg", disease, (870,620))
+
+        self.cities.append(losAngeles)
+        self.cities.append(miami)
+        self.cities.append(mexicoCity)
+        self.cities.append(bogota)
+        self.cities.append(lima)
+        self.cities.append(santiago)
+        self.cities.append(buenosAires)
+        self.cities.append(saoPaulo)
+        self.cities.append(lagos)
+        self.cities.append(khartoum)
+        self.cities.append(kinshasa)
+        self.cities.append(johannesburg)
+
+        # Connecting the yellow Cities witht he blue cities
+        self.makeCitiesAdjacent(losAngeles, sanFrancisco)
+        self.makeCitiesAdjacent(losAngeles, chicago)
+        self.makeCitiesAdjacent(mexicoCity, chicago)
+        self.makeCitiesAdjacent(miami, atlanta)
+        self.makeCitiesAdjacent(miami, washington)
+        self.makeCitiesAdjacent(saoPaulo, madrid)
+
+        # Connect the yellow citys to yellow Cities
+        self.makeCitiesAdjacent(losAngeles, mexicoCity)
+        self.makeCitiesAdjacent(mexicoCity, miami)
+        self.makeCitiesAdjacent(mexicoCity, lima)
+        self.makeCitiesAdjacent(mexicoCity, bogota)
+        self.makeCitiesAdjacent(miami, bogota)
+        self.makeCitiesAdjacent(bogota, lima)
+        self.makeCitiesAdjacent(bogota, buenosAires)
+        self.makeCitiesAdjacent(bogota, saoPaulo)
+        self.makeCitiesAdjacent(lima, santiago)
+        self.makeCitiesAdjacent(buenosAires, saoPaulo)
+        self.makeCitiesAdjacent(saoPaulo, lagos)
+        self.makeCitiesAdjacent(lagos, kinshasa)
+        self.makeCitiesAdjacent(lagos, khartoum)
+        self.makeCitiesAdjacent(khartoum, kinshasa)
+        self.makeCitiesAdjacent(khartoum, johannesburg)
+        self.makeCitiesAdjacent(kinshasa, johannesburg)
+
+        # Zombie Cities
+        disease = Disease((0,0,0))
+        self.diseases.append(disease)
+
+        algiers     = City("Algiers",disease, (790,360))
+        cairo       = City("Cairo", disease, (860, 375))
+        istanbul    = City("Istanbul", disease, (880,305))
+        baghdad     = City("Baghdad", disease, (940, 350))
+        moscow      = City("Moscow", disease, (930, 240))
+        riyrdh      = City("Riyrad", disease, (960, 430))
+        tehran      = City("Tehran", disease, (1020, 295))
+        karachi     = City("Karachi", disease, (1040, 380))
+        mumbai      = City("Mumbai", disease, (1050, 440))
+        delhi       = City("Delhi", disease, (1100, 340))
+        chennai     = City("Chennai", disease, (1120, 480))
+        kolkata     = City("Kolkata", disease, (1170, 360))
+
+        self.cities.append(algiers)
+        self.cities.append(cairo)
+        self.cities.append(istanbul)
+        self.cities.append(baghdad)
+        self.cities.append(moscow)
+        self.cities.append(riyrdh)
+        self.cities.append(tehran)
+        self.cities.append(karachi)
+        self.cities.append(mumbai)
+        self.cities.append(delhi)
+        self.cities.append(chennai)
+        self.cities.append(kolkata)        
+
+        # connect yellow and Zombies
+        self.makeCitiesAdjacent(cairo,khartoum)
+
+        # connect zombies and blue
+        self.makeCitiesAdjacent(stPetersburg, moscow)
+        self.makeCitiesAdjacent(stPetersburg, istanbul)
+        self.makeCitiesAdjacent(milan, istanbul)
+        self.makeCitiesAdjacent(paris, algiers)
+        self.makeCitiesAdjacent(madrid, algiers)
+
+        # connect Zombie cities
+
+        self.makeCitiesAdjacent(algiers, cairo)
+        self.makeCitiesAdjacent(algiers, istanbul)
+        self.makeCitiesAdjacent(cairo, istanbul)
+        self.makeCitiesAdjacent(cairo, baghdad)
+        self.makeCitiesAdjacent(cairo, riyrdh)
+        self.makeCitiesAdjacent(istanbul, baghdad)
+        self.makeCitiesAdjacent(istanbul, moscow)
+        self.makeCitiesAdjacent(moscow, tehran)
+        self.makeCitiesAdjacent(baghdad, tehran)
+        self.makeCitiesAdjacent(baghdad, karachi)
+        self.makeCitiesAdjacent(baghdad, riyrdh)
+        self.makeCitiesAdjacent(riyrdh, karachi)
+        self.makeCitiesAdjacent(tehran, karachi)
+        self.makeCitiesAdjacent(tehran, delhi)
+        self.makeCitiesAdjacent(karachi, delhi)
+        self.makeCitiesAdjacent(karachi, mumbai)
+        self.makeCitiesAdjacent(mumbai, delhi)
+        self.makeCitiesAdjacent(mumbai, chennai)
+        self.makeCitiesAdjacent(delhi, kolkata)
+        self.makeCitiesAdjacent(delhi, chennai)
+        self.makeCitiesAdjacent(chennai, kolkata)
+
+        # Red Cities
+        disease = Disease((255,0,0))
+        self.diseases.append(disease)
+
+        beijing     = City("Beijing", disease, (1230, 270))
+        seoul       = City("Seoul", disease, (1320, 270))
+        shanghai    = City("Shanghai", disease, (1230, 340))
+        tokyo       = City("Tokyo", disease, (1400, 310))
+        hongKong    = City("Hong Kong", disease, (1240, 400))
+        taipei      = City("Taipei", disease, (1320,390))
+        osaka       = City("Osaka", disease, (1390, 360))
+        bangkok     = City("Bangkok", disease, (1190, 445))
+        hoChiMinhCity = City("Ho Chi Minh City", disease, (1250, 510))
+        manila      = City("Manila", disease, (1340, 500))
+        jakarta     = City("Jakarta", disease, (1190, 555))
+        sydney      = City("Sydney", disease, (1395, 680))
+
+        self.cities.append(beijing)
+        self.cities.append(seoul)
+        self.cities.append(shanghai)
+        self.cities.append(tokyo)
+        self.cities.append(hongKong)
+        self.cities.append(taipei)
+        self.cities.append(osaka)
+        self.cities.append(bangkok)
+        self.cities.append(hoChiMinhCity)
+        self.cities.append(manila)
+        self.cities.append(jakarta)
+        self.cities.append(sydney)
+
+        # Connect zombie and red
+        self.makeCitiesAdjacent(kolkata, bangkok)
+        self.makeCitiesAdjacent(kolkata, hongKong)
+        self.makeCitiesAdjacent(chennai, bangkok)
+        self.makeCitiesAdjacent(chennai, jakarta) 
+
+        # Connect red with bule
+        self.makeCitiesAdjacent(tokyo, sanFrancisco)
+        self.makeCitiesAdjacent(manila, sanFrancisco)
+        self.makeCitiesAdjacent(sydney, losAngeles)
+        
+        # Connect red with red
+        self.makeCitiesAdjacent(beijing, seoul)
+        self.makeCitiesAdjacent(beijing, shanghai)
+        self.makeCitiesAdjacent(seoul, shanghai)
+        self.makeCitiesAdjacent(seoul, tokyo)
+        self.makeCitiesAdjacent(shanghai, tokyo)
+        self.makeCitiesAdjacent(shanghai, hongKong)
+        self.makeCitiesAdjacent(shanghai, taipei)
+        self.makeCitiesAdjacent(tokyo, osaka)
+        self.makeCitiesAdjacent(osaka, taipei)
+        self.makeCitiesAdjacent(taipei,hongKong)
+        self.makeCitiesAdjacent(taipei, manila)
+        self.makeCitiesAdjacent(hongKong, bangkok)
+        self.makeCitiesAdjacent(hongKong, hoChiMinhCity)
+        self.makeCitiesAdjacent(hongKong, manila)
+        self.makeCitiesAdjacent(bangkok, hoChiMinhCity)
+        self.makeCitiesAdjacent(bangkok, jakarta)
+        self.makeCitiesAdjacent(hoChiMinhCity, manila)
+        self.makeCitiesAdjacent(hoChiMinhCity, jakarta)
+        self.makeCitiesAdjacent(manila, sydney)
+        self.makeCitiesAdjacent(jakarta, sydney)      
+
         
     def setupInfectionDeck(self):
         """ Setup the Infection Deck """
