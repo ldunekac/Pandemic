@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-
+from View.GUI.Helper.label import Label
 from View.GUI.window import window
 
 class MenuEntryView:
@@ -8,47 +8,32 @@ class MenuEntryView:
     def __init__(self, menuEntryItem, selectedPicture, position):
         self.position = position
         self.menuEntryItem = menuEntryItem
+        self.textOffset = 48
+        self.label = Label(menuEntryItem.getText(), 48, (position[0] + self.textOffset, position[1]))
         self.selectedPicture = selectedPicture
-        self.fontSize = 48
-        self.font = pygame.font.SysFont(None, self.fontSize)
         self.windowSize = window.getWindowSize()
         self.transformImage()
-        self.set_rect()
-        
 
     def draw(self):
-        self.set_rend()
+        surface = pygame.Surface((self.label.getFontSize() + self.label.getWidth() + 100,self.label.getHeight()), flags = pygame.SRCALPHA)
         
-        surface = pygame.Surface((self.fontSize + self.rend.get_rect().width + 100,self.fontSize), flags = pygame.SRCALPHA)
-        
-
         if self.menuEntryItem.isSelected():
             surface.blit(self.transformImage,(0,0))
-        
-        surface.blit(self.rend, self.textPosition)
+        surface.blit(self.label.draw(), (self.textOffset,0))
         return surface
-
-    def set_rect(self):
-        self.set_rend()
-        self.rect = self.rend.get_rect()
-        self.textPosition = self.rend.get_rect(left = self.fontSize,centery = self.transformImage.get_rect().height/2)
-        self.rect.topleft = (self.position[0] + self.fontSize, self.position[1])
-        
-    def set_rend(self):
-        self.rend = self.font.render(self.menuEntryItem.getText(),1, (10,10,10))
         
     def transformImage(self):
-        self.transformImage = pygame.transform.scale(self.selectedPicture,(self.fontSize,self.fontSize))
+        self.transformImage = pygame.transform.scale(self.selectedPicture,(self.label.getFontSize(),self.label.getHeight()))
 
     def getFontSize(self):
-        return self.fontSize
+        return self.label.getFontSize()
 
     def selectIfMouseEntered(self, mousePosition):
-        if self.rect.collidepoint(mousePosition):
+        if self.label.mouseOnText(mousePosition):
             self.menuEntryItem.select()
 
     def executeIfSelected(self, mousePosition):
-        if self.rect.collidepoint(mousePosition):
+        if self.label.mouseOnText(mousePosition):
             self.menuEntryItem.run()
 
 
