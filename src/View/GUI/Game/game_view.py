@@ -24,6 +24,7 @@ class GameView:
         self.actionView = ActionView()
         self.windowSize = window.getWindowSize()
         self.boardRatio = (1,1)
+        self.scailingFactor = (window.getWindowSize()[0]/1600.0, window.getWindowSize()[1]/900.0)
         
         #setting up player views
         players = level.getPlayers()
@@ -43,8 +44,14 @@ class GameView:
         #Draw Diseases
 
         #Draw Players
-        
+        for playerView in self.playerViews:
+            city = playerView.getCurrentCity()
+            cityPosition = city.getMapLocation()
+            cityCoord = self.getCoord(cityPosition)
+            boardSurface.blit(playerView.draw(),(cityCoord[0] - playerView.getWidth(), cityCoord[1] - playerView.getHeight()) )
 
         return boardSurface
         
         
+    def getCoord(self, position):
+        return tuple([int(a*b) for a,b in zip(self.scailingFactor,position)])
