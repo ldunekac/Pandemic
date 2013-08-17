@@ -22,6 +22,9 @@ class Level:
 
     def getCities(self):
         return self.cities
+
+    def getPlayers(self):
+        return self.players
         
     def setup(self):
         """ Setup the level for the start of the game """

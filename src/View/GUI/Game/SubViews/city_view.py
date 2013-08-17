@@ -18,12 +18,12 @@ class CityView:
         surface = pygame.Surface(window.getWindowSize(),  pygame.SRCALPHA)
         for city in self.cityList:
             cityColor = city.getDisease().getColor()
-            cityLocation = self.getCord(city.getMapLocation())
+            cityLocation = self.getCoord(city.getMapLocation())
             pygame.draw.circle(surface,cityColor,cityLocation,self.radious)
             label = Label(city.getName(), self.fontSize,(0,0),(255,255,255))
             renderPosition = (cityLocation[0] - label.getWidth()/2, cityLocation[1] + self.radious + self.fontBuffer)
             surface.blit(label.draw(),renderPosition)
         return surface
 
-    def getCord(self, position):
+    def getCoord(self, position):
         return tuple([int(a*b) for a,b in zip(self.scailingFactor,position)])
