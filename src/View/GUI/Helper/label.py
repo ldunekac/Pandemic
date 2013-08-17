@@ -3,11 +3,12 @@ from pygame.locals import *
 
 class Label:
 
-    def __init__(self,text = "", fontSize = 12, textPosition = (0,0)):
+    def __init__(self,text = "", fontSize = 12, textPosition = (0,0), color = (10,10,10)):
         """ Makes a Label for text"""
         self.text = text
         self.fontSize = fontSize
         self.textPosition = textPosition
+        self.color = color
         self.font = pygame.font.SysFont(None, self.fontSize)
         self.renderFont()
 
@@ -39,7 +40,7 @@ class Label:
         self.setTextPosition = self.render.get_rect(left = myLeft, centery = myCentery)
 
     def setRenderText(self):
-        self.render = self.font.render(self.text, 1, (10,10,10))
+        self.render = self.font.render(self.text, 1, self.color)
 
     def getHeight(self):
         return self.rectangle.height
