@@ -4,6 +4,8 @@ from Level.Deck.player_deck import PlayerDeck
 from Level.Deck.Card.city_card import CityCard
 from Level.Disease.disease import Disease
 from Level.Player.player import Player
+from Level.research_station_manager import ResearchStationManager
+
 
 class Level:
     """ Represents a single Level of the Expanded Pandemic Game """
@@ -12,7 +14,7 @@ class Level:
         """ Initialize the Level """
         self.diseases = []
         self.cities = []
-        
+
         self.infectionDeck = None
         self.playerDeck = None
         
@@ -20,11 +22,17 @@ class Level:
 
         self.setup()
 
+        self.researchStationManager = ResearchStationManager(self.startingCity)
+        self.researchStationManager.addResearchStation(self.tempCity)
+
     def getCities(self):
         return self.cities
 
     def getPlayers(self):
         return self.players
+
+    def getResearchStationManager(self):
+        return self.researchStationManager
         
     def setup(self):
         """ Setup the level for the start of the game """
@@ -42,6 +50,7 @@ class Level:
         self.diseases.append(disease)
         
         sanFrancisco = City("San Francisco", disease,(220,310))
+        self.tempCity = sanFrancisco
         chicago = City("Chicago", disease, (350,280))
         atlanta = City("Atlanta", disease,(385,340))
         montreal = City("Montreal", disease,(440,275))
@@ -294,12 +303,13 @@ class Level:
         # Add Players to list
         player1 = Player(self.startingCity)
         player2 = Player(self.startingCity)
-        player3 = Player(self.cities[22])
-        player4 = Player(self.cities[22])
+        player3 = Player(self.startingCity)
+        player4 = Player(self.startingCity)
         self.players.append(player1)
         self.players.append(player2)
         self.players.append(player3)
         self.players.append(player4)
+
         # Give each 4 cards in their hand
         for i in range(4):
             card = self.playerDeck.draw()

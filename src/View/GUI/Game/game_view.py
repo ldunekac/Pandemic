@@ -6,6 +6,7 @@ from View.GUI.Game.SubViews.card_view   import CardView
 from View.GUI.Game.SubViews.action_view import ActionView
 from View.GUI.Game.SubViews.board_view  import BoardView
 from View.GUI.Game.PlayerViews.player_view import PlayerView
+from View.GUI.Game.ResearchStationView.research_station_view import ResearchStationView
 from View.GUI.window import window
 
 """ 
@@ -25,7 +26,8 @@ class GameView:
         self.windowSize = window.getWindowSize()
         self.boardRatio = (1,1)
         self.scailingFactor = (window.getWindowSize()[0]/1600.0, window.getWindowSize()[1]/900.0)
-        
+        self.researchStationManager = level.getResearchStationManager()
+        self.researchStationView = ResearchStationView()
         #setting up player views
         players = level.getPlayers()
         self.playerViews = []
@@ -40,7 +42,9 @@ class GameView:
         #Draw board Surface
         boardSurface = pygame.transform.scale(self.boardView.draw(),boardSurfaceSize)
         #Draw Reseach Stations
-
+        for city in self.researchStationManager.getCities():
+            cityLocation = self.getCoord(city.getMapLocation())
+            boardSurface.blit(self.researchStationView.draw(),(cityLocation[0] - self.researchStationView.getWidth()/2, cityLocation[1] - self.researchStationView.getHeight()/2 ) )
         #Draw Diseases
 
         #Draw Players
@@ -59,8 +63,6 @@ class GameView:
                 boardSurface.blit(playerView.draw(),(cityCoord[0] - playerView.getWidth(), cityCoord[1]) )
             else:
                 boardSurface.blit(playerView.draw(),(cityCoord[0], cityCoord[1]) )
-            
-
         return boardSurface
         
         

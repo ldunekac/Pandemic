@@ -9,6 +9,9 @@ class ResearchStationManager:
         else:
             self.cities = [initialCity]
 
+    def getCities(self):
+        return self.cities
+
     def canAddResearchStation(self):
         """ Returns true if more research stations can be added """
         return len(self.cities) < TheLevelSettings.MAX_RESEARCH_STATIONS
