@@ -44,11 +44,22 @@ class GameView:
         #Draw Diseases
 
         #Draw Players
+        cityList = []
         for playerView in self.playerViews:
             city = playerView.getCurrentCity()
+            location = cityList.count(city)
+            cityList.append(city)
             cityPosition = city.getMapLocation()
             cityCoord = self.getCoord(cityPosition)
-            boardSurface.blit(playerView.draw(),(cityCoord[0] - playerView.getWidth(), cityCoord[1] - playerView.getHeight()) )
+            if location == 0:
+                boardSurface.blit(playerView.draw(),(cityCoord[0] - playerView.getWidth(), cityCoord[1] - playerView.getHeight()) )
+            elif location == 1:
+                boardSurface.blit(playerView.draw(),(cityCoord[0], cityCoord[1] - playerView.getHeight()) )
+            elif location == 2:
+                boardSurface.blit(playerView.draw(),(cityCoord[0] - playerView.getWidth(), cityCoord[1]) )
+            else:
+                boardSurface.blit(playerView.draw(),(cityCoord[0], cityCoord[1]) )
+            
 
         return boardSurface
         

@@ -292,12 +292,25 @@ class Level:
         """ Setup Players """
         # Choose roles
         # Add Players to list
-        player = Player(self.startingCity)
-        self.players.append(player)
+        player1 = Player(self.startingCity)
+        player2 = Player(self.startingCity)
+        player3 = Player(self.cities[22])
+        player4 = Player(self.cities[22])
+        self.players.append(player1)
+        self.players.append(player2)
+        self.players.append(player3)
+        self.players.append(player4)
         # Give each 4 cards in their hand
         for i in range(4):
             card = self.playerDeck.draw()
-            player.addCardToHand(card)
+            player1.addCardToHand(card)
+            card = self.playerDeck.draw()
+            player2.addCardToHand(card)
+            card = self.playerDeck.draw()
+            player3.addCardToHand(card)
+            card = self.playerDeck.draw()
+            player4.addCardToHand(card)
+
         
     def addEpidemics(self):
         """ Setup Players """
