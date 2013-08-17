@@ -17,6 +17,12 @@ class City:
 
     def getName(self):
         return self.name
+
+    def isInfected(self):
+        for disease in self.diseaseCounts:
+            if self.diseaseCounts[disease] > 0:
+                return True
+        return False
         
     def getDisease(self):
         return self.disease

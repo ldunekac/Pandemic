@@ -6,6 +6,7 @@ from View.GUI.Game.SubViews.card_view   import CardView
 from View.GUI.Game.SubViews.action_view import ActionView
 from View.GUI.Game.SubViews.board_view  import BoardView
 from View.GUI.Game.PlayerViews.player_view import PlayerView
+from View.GUI.Helper.label import Label
 from View.GUI.Game.ResearchStationView.research_station_view import ResearchStationView
 from View.GUI.window import window
 
@@ -20,7 +21,8 @@ class GameView:
     def __init__(self, level):
         """ Initializes the game View"""
         self.level = level
-        self.boardView = BoardView(level.getCities())
+        self.boardView = BoardView(self.level.getCities())
+        self.drawDiseaseBuffer = self.boardView.getDiseaseBuffer()
         self.cardView = CardView()
         self.actionView = ActionView()
         self.windowSize = window.getWindowSize()
@@ -46,6 +48,11 @@ class GameView:
             cityLocation = self.getCoord(city.getMapLocation())
             boardSurface.blit(self.researchStationView.draw(),(cityLocation[0] - self.researchStationView.getWidth()/2, cityLocation[1] - self.researchStationView.getHeight()/2 ) )
         #Draw Diseases
+        for city in self.level.getCities():
+            if city.isInfected():
+                label = Label(str(city.getDiseaseInfections(city.getDisease())), 16)
+                cityLocation = self.getCoord(city.getMapLocation())
+                boardSurface.blit(label.draw(),(cityLocation[0], cityLocation[1] + self.drawDiseaseBuffer) )
 
         #Draw Players
         cityList = []

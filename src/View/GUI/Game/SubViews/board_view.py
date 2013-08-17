@@ -15,6 +15,7 @@ class BoardView:
         self.scailingFactor = (window.getWindowSize()[0]/1600.0, window.getWindowSize()[1]/900.0)
         self.lineView = LineView(self.cityList)
         self.cityView = CityView(self.cityList)
+        self.drawDiseaseBuffer = self.cityView.getBottom()
 
         self.staticSurface = None 
         self.createStaticSurface()
@@ -37,3 +38,5 @@ class BoardView:
     def getCord(self, position):
         return tuple([int(a*b) for a,b in zip(self.scailingFactor,position)])
 
+    def getDiseaseBuffer(self):
+        return self.drawDiseaseBuffer
