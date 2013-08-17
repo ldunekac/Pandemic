@@ -23,7 +23,6 @@ class Level:
         self.setup()
 
         self.researchStationManager = ResearchStationManager(self.startingCity)
-        self.researchStationManager.addResearchStation(self.tempCity)
 
     def getCities(self):
         return self.cities
@@ -50,7 +49,6 @@ class Level:
         self.diseases.append(disease)
         
         sanFrancisco = City("San Francisco", disease,(220,310))
-        self.tempCity = sanFrancisco
         chicago = City("Chicago", disease, (350,280))
         atlanta = City("Atlanta", disease,(385,340))
         montreal = City("Montreal", disease,(440,275))
